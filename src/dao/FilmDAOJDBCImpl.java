@@ -147,7 +147,7 @@ public class FilmDAOJDBCImpl {
 
 			PreparedStatement ps = conn.prepareStatement("DELETE FROM film WHERE id=?");
 			ps.setInt(1, id);
-			ps.executeQuery();
+			ps.executeUpdate();
 
 			ps.close();
 			conn.close();
