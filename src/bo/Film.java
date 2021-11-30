@@ -1,18 +1,21 @@
 package bo;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+
 public class Film {
 	private int film_id;
 	private String nom;
-	private int duree;
+	private Time duree;
 	private String producteur;
 	private String realisateur;
 	private String pegi;
-	private String date_diffusion;
+	private Timestamp date_diffusion;
 	private String genre;
 
 	public Film() {}
 
-	public Film(int film_id, String nom, int duree, String producteur, String realisateur, String pegi, String date_diffusion, String genre) {
+	public Film(int film_id, String nom, Time duree, String producteur, String realisateur, String pegi, Timestamp date_diffusion, String genre) {
 		this.film_id = film_id;
 		this.nom = nom;
 		this.duree = duree;
@@ -39,11 +42,11 @@ public class Film {
 		nom = value;
 	}
 
-	public int getDuree() {
+	public Time getDuree() {
 		return duree;
 	}
 
-	public void setDuree(int value) {
+	public void setDuree(Time value) {
 		duree = value;
 	}
 
@@ -71,11 +74,11 @@ public class Film {
 		pegi = value;
 	}
 
-	public String getDateDiffusion() {
+	public Timestamp getDateDiffusion() {
 		return date_diffusion;
 	}
 
-	public void setDateDiffusion(String value) {
+	public void setDateDiffusion(Timestamp value) {
 		date_diffusion = value;
 	}
 
