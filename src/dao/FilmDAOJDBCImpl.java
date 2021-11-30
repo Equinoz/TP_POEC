@@ -108,7 +108,6 @@ public class FilmDAOJDBCImpl {
 	}
 
 	public void update(Film updatedFilm) {
-		int result = -1;
 		Connection conn;
 
 		try {

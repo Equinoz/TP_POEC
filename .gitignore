@@ -1,5 +1,7 @@
-
+/out
+/.idea
 /bin/
 .classpath
 .project
 src/*/*.class
+Cinema.iml
