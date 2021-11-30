@@ -10,11 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SalleDAOJDBClmpl {
-    public List<Salle> sellectAll(){
+	private String connexionParam = "jdbc:mysql://localhost/cinema?user=root&password=root";
+	
+    public List<Salle> selectAll(){
         List<Salle> resultat = new ArrayList<Salle>();
         Connection connection;
         try{
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/cinema?user=root&password=root");
+            connection = DriverManager.getConnection(connexionParam);
 
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM salle");
             ResultSet rs = ps.executeQuery(); // select
@@ -35,7 +37,7 @@ public class SalleDAOJDBClmpl {
         Salle resultat = null;
         Connection connection;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/cinema?user=root&password=root");
+            connection = DriverManager.getConnection(connexionParam);
 
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM salle WHERE salle_id=?");
             ps.setInt(1, id);
@@ -58,7 +60,7 @@ public class SalleDAOJDBClmpl {
         int resultat = -1;
         Connection connection;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/cinema?user=root&password=root");
+            connection = DriverManager.getConnection(connexionParam);
 
             PreparedStatement ps = connection.prepareStatement("INSERT INTO salle(salle_id, capacité, numéro_salle,équipement_3D,cinemas_id) VALUES (?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setInt(1, salleInsert.getSalle_id());
@@ -81,53 +83,44 @@ public class SalleDAOJDBClmpl {
         }
         return resultat;
     }
-    public int update(Salle salleUpdate) {
-        int resultat = -1;
+    public void update(Salle salleUpdate) {
         Connection connection;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/cinema?user=root&password=root");
+            connection = DriverManager.getConnection(connexionParam);
 
-            PreparedStatement ps = connection.prepareStatement("UPDATE INTO salle(salle_id, capacité, numéro_salle,équipement_3D,cinemas_id) VALUES (?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, salleUpdate.getSalle_id());
-            ps.setInt(2, salleUpdate.getCapacité());
-            ps.setInt(3, salleUpdate.getNumero_salle());
-            ps.setInt(4, salleUpdate.getEquipement_3D());
-            ps.setInt(5, salleUpdate.getCinemas_id());
+            PreparedStatement ps = connection.prepareStatement(
+					"UPDATE salle SET capacité =?," 
+							+ "numéro_salle =?," 
+							+ "équipement_3D =?," 
+							+ "cinemas_id =?"
+							+ " WHERE salle_id=?");
+            ps.setInt(1, salleUpdate.getCapacité());
+            ps.setInt(2, salleUpdate.getNumero_salle());
+            ps.setInt(3, salleUpdate.getEquipement_3D());
+            ps.setInt(4, salleUpdate.getCinemas_id());
+            ps.setInt(5, salleUpdate.getSalle_id());
 
-            ps.executeUpdate(); // insert, update, delete
-            ResultSet rs = ps.getGeneratedKeys();
-
-            if (rs.next()) {
-                resultat = rs.getInt(1);
-            }
+            ps.executeUpdate(); // insert, update, delete 
 
             ps.close();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return resultat;
     }
-    public int delete(Salle salledelete) {
-        int resultat = -1;
+    public void deleteById(int id) {
         Connection connection;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/cinema?user=root&password=root");
+            connection = DriverManager.getConnection(connexionParam);
 
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM salle WHERE salle_id= ?", PreparedStatement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, salledelete.getSalle_id());
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM salle WHERE salle_id= ?");
+            ps.setInt(1, id);
             ps.executeUpdate(); // insert, update, delete
-            ResultSet rs = ps.getGeneratedKeys();
-
-            if (rs.next()) {
-                resultat = rs.getInt(1);
-            }
 
             ps.close();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return resultat;
     }
 }
