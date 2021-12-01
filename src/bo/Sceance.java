@@ -4,8 +4,11 @@ import java.sql.Time;
 import java.sql.Timestamp;
 
 
+
 public class Sceance {
 
+
+	
 	private int sceanceId;
 	private int filmId;
 	private int salleId;

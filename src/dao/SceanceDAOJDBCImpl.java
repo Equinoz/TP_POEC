@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,32 +50,119 @@ public class SceanceDAOJDBCImpl {
 		return ret;
 	}
 	
-	public List<Sceance> selectByDate(LocalDateTime dateTime ) {
-		List<Sceance> ret = new ArrayList<Sceance>();
-		Connection conn;
+	public List<Sceance> getSceanceWithRemainigSeats(){
+		List<Sceance> lst = new ArrayList<Sceance>();
+		
+		Connection conn;		
 		try {
 			conn = DriverManager.getConnection(connexionParam);
-
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM sceance WHERE horaire_scéance >= ?");
-			ps.setTimestamp(1, Timestamp.valueOf(dateTime));
+			PreparedStatement ps = conn.prepareStatement("SELECT sc.* FROM sceance as sc "
+					+ "JOIN salle s ON s.salle_id = sc.salle_id "
+					+ " WHERE sc.occupation < s.capacité");
+			
 			ResultSet rs = ps.executeQuery(); // select
-
-			// Un curseur qui se déplace ligne par ligne pour accéder aux informations
-			while (rs.next()) {
-				Sceance currentSceance = new Sceance(rs.getInt("scéance_id"), rs.getInt("film_id"),
-						rs.getInt("salle_id"), rs.getTimestamp("horaire_scéance"), rs.getTime("durée_réclams"),
+			while (rs.next()) {	
+				
+				Sceance currentSceance = new Sceance(rs.getInt("scéance_id"),rs.getInt("film_id"),rs.getInt("salle_id"), rs.getTimestamp("horaire_scéance"), rs.getTime("durée_réclams"),
 						rs.getInt("prix"), rs.getInt("occupation"), rs.getBoolean("VOSTFR"));
 
-				ret.add(currentSceance);
-
+				lst.add(currentSceance);
 			}
 			ps.close();
 			conn.close();
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return lst;
+	}
+	
+	public int getRemainingSeatsBySceance(Sceance sc) {
+		int ret = 0;
+		Connection conn;		
+		try {
+			conn = DriverManager.getConnection(connexionParam);
+			PreparedStatement ps = conn.prepareStatement("SELECT sc.occupation,s.capacité FROM sceance as sc "
+					+ "JOIN salle s ON s.salle_id = sc.salle_id "
+					+ " WHERE sc.scéance_id = ?");
+			ps.setInt(1, sc.getSceanceId());
+			ResultSet rs = ps.executeQuery(); // select
+			if (rs.next()) {				
+				 ret = rs.getInt("s.capacité")-rs.getInt("sc.occupation");
+			}
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return ret;
 	}
+	
+	public LocalTime getTimePassedSceance(Sceance sc) {
+		LocalDateTime t = null;
+		Connection conn;		
+		try {
+			conn = DriverManager.getConnection(connexionParam);
+			PreparedStatement ps = conn.prepareStatement("SELECT f.durée,sc.horaire_scéance FROM sceance as sc "
+					+ "JOIN film f ON sc.film_id = f.film_id "
+					+ " WHERE sc.scéance_id = ?");
+			ps.setInt(1, sc.getSceanceId());
+			ResultSet rs = ps.executeQuery(); // select
+			if (rs.next()) {
+				t = LocalDateTime.of(LocalDateTime.now().minusYears(rs.getTimestamp("sc.horaire_scéance").getYear()).getYear(),
+						LocalDateTime.now().minusMonths(rs.getTimestamp("sc.horaire_scéance").getMonth()).getMonth(),
+						LocalDateTime.now().minusDays(rs.getTimestamp("sc.horaire_scéance").getDay()).getDayOfMonth(),
+						LocalDateTime.now().minusHours(rs.getTimestamp("sc.horaire_scéance").getHours()).getHour(),
+						LocalDateTime.now().minusMinutes(rs.getTimestamp("sc.horaire_scéance").getMinutes()).getMinute(),
+						LocalDateTime.now().minusSeconds(rs.getTimestamp("sc.horaire_scéance").getSeconds()).getSecond());
+//				if(rs.getTimestamp("sc.horaire_scéance").toLocalDateTime().compareTo(t)>0) {
+//					t = rs.getTimestamp("sc.horaire_scéance").toLocalDateTime();
+//				}
+			}
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return t.toLocalTime();
+	}
+	
+	public StatusSceance getStatusSceance(Sceance sc) {
+		
+		
+		
+		return StatusSceance.FINI;		
+	}
+	
+	public List<Sceance> selectByDate(LocalDateTime dateTime ) {
+        List<Sceance> ret = new ArrayList<Sceance>();
+        Connection conn;
+        try {
+            conn = DriverManager.getConnection(connexionParam);
+
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM sceance WHERE horaire_scéance >= ?");
+            ps.setTimestamp(1, Timestamp.valueOf(dateTime));
+            ResultSet rs = ps.executeQuery(); // select
+
+            // Un curseur qui se déplace ligne par ligne pour accéder aux informations
+            while (rs.next()) {
+                Sceance currentSceance = new Sceance(rs.getInt("scéance_id"), rs.getInt("film_id"),
+                        rs.getInt("salle_id"), rs.getTimestamp("horaire_scéance"), rs.getTime("durée_réclams"),
+                        rs.getInt("prix"), rs.getInt("occupation"), rs.getBoolean("VOSTFR"));
+
+                ret.add(currentSceance);
+
+            }
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ret;
+    }
 	
 	public List<Sceance> getSceanceUpgraded(List<Sceance> lst){
 		List<Sceance> ret = new ArrayList<Sceance>();
