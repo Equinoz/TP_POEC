@@ -101,7 +101,8 @@ public class SceanceDAOJDBCImpl {
 	}
 	
 	public LocalTime getTimePassedSceance(Sceance sc) {
-		LocalDateTime t = null;
+		LocalDateTime dateTime = null;
+		LocalTime time = null;
 		Connection conn;		
 		try {
 			conn = DriverManager.getConnection(connexionParam);
@@ -111,15 +112,17 @@ public class SceanceDAOJDBCImpl {
 			ps.setInt(1, sc.getSceanceId());
 			ResultSet rs = ps.executeQuery(); // select
 			if (rs.next()) {
-				t = LocalDateTime.of(LocalDateTime.now().minusYears(rs.getTimestamp("sc.horaire_scéance").getYear()).getYear(),
+				dateTime = LocalDateTime.of(LocalDateTime.now().minusYears(rs.getTimestamp("sc.horaire_scéance").getYear()).getYear(),
 						LocalDateTime.now().minusMonths(rs.getTimestamp("sc.horaire_scéance").getMonth()).getMonth(),
 						LocalDateTime.now().minusDays(rs.getTimestamp("sc.horaire_scéance").getDay()).getDayOfMonth(),
 						LocalDateTime.now().minusHours(rs.getTimestamp("sc.horaire_scéance").getHours()).getHour(),
 						LocalDateTime.now().minusMinutes(rs.getTimestamp("sc.horaire_scéance").getMinutes()).getMinute(),
 						LocalDateTime.now().minusSeconds(rs.getTimestamp("sc.horaire_scéance").getSeconds()).getSecond());
-//				if(rs.getTimestamp("sc.horaire_scéance").toLocalDateTime().compareTo(t)>0) {
-//					t = rs.getTimestamp("sc.horaire_scéance").toLocalDateTime();
-//				}
+				if(rs.getTime("f.durée").toLocalTime().compareTo(dateTime.toLocalTime())<0) {
+					time = rs.getTime("f.durée").toLocalTime();
+				} else {
+					time = dateTime.toLocalTime();
+				}
 			}
 			ps.close();
 			conn.close();
@@ -127,7 +130,7 @@ public class SceanceDAOJDBCImpl {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		return t.toLocalTime();
+		return time;
 	}
 	
 	public StatusSceance getStatusSceance(Sceance sc) {
