@@ -77,7 +77,57 @@ public class SceanceDAOJDBCImpl {
 	}
 	
 	public List<Sceance> getSceanceUpgraded(List<Sceance> lst){
-		return null;
+		List<Sceance> ret = new ArrayList<Sceance>();
+		Connection conn;
+		String strWhere = "";
+		
+		try {
+			conn = DriverManager.getConnection(connexionParam);
+
+			for(int i = 0;i<lst.size();i++) {
+				strWhere += "?";
+				if(i<(lst.size()-1)) {
+					strWhere +=" OR sc.scéance_id = ";
+				} 
+			}
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM sceance as sc "
+					+ "JOIN salle s ON s.salle_id = sc.salle_id "
+					+ "JOIN film f ON f.film_id = sc.film_id"
+					+ " WHERE sc.scéance_id = "
+					+ strWhere);
+			for(int i = 0;i<lst.size();i++) {
+				ps.setInt(i+1, lst.get(i).getSceanceId());
+			}
+			ResultSet rs = ps.executeQuery(); // select
+
+			// Un curseur qui se déplace ligne par ligne pour accéder aux informations
+			while (rs.next()) {
+				Film currentFilm = new Film(rs.getInt("f.film_id"),
+						rs.getString("f.nom"),
+						rs.getTime("f.durée"),
+						rs.getString("f.Producteur"),
+						rs.getString("f.Réalisateur"),
+						rs.getString("f.PEGI"),
+						rs.getTimestamp("f.date_diffusion"),
+						rs.getString("f.genre"));
+				Salle currentSalle = new Salle(rs.getInt("s.salle_id"),
+						rs.getInt("s.capacité"),
+						rs.getInt("s.numéro_salle"),
+                        rs.getInt("s.équipement_3D"),
+                        rs.getInt("s.cinemas_id"));
+				
+				Sceance currentSceance = new Sceance(rs.getInt("scéance_id"),currentFilm,currentSalle, rs.getTimestamp("horaire_scéance"), rs.getTime("durée_réclams"),
+						rs.getInt("prix"), rs.getInt("occupation"), rs.getBoolean("VOSTFR"));
+
+				ret.add(currentSceance);
+
+			}
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		return ret;
 	}
 	
 	public List<Sceance> selectAllWithSF() {
