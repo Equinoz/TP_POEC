@@ -3,6 +3,7 @@ package bo;
 import java.sql.Time;
 import java.sql.Timestamp;
 
+
 public class Sceance {
 
 	private int sceanceId;
@@ -13,6 +14,8 @@ public class Sceance {
 	private int prix;
 	private int occupation;
 	private boolean vostfr;
+	private Film filmAssocie;
+	private Salle salleAssociee;
 	
 	
 	
@@ -43,12 +46,63 @@ public class Sceance {
 		this.occupation = occupation;
 		this.vostfr = vostfr;
 	}
+	
+
+	/**
+	 * @param sceanceId
+	 * @param horaireSceance
+	 * @param dureeReclams
+	 * @param prix
+	 * @param occupation
+	 * @param vostfr
+	 * @param filmAssocie
+	 * @param sceanceAssociee
+	 */
+	public Sceance(int sceanceId,Film filmAssocie, Salle salleAssociee, Timestamp horaireSceance, Time dureeReclams, 
+			int prix, int occupation, boolean vostfr) {
+		this.sceanceId = sceanceId;
+		this.horaireSceance = horaireSceance;
+		this.dureeReclams = dureeReclams;
+		this.prix = prix;
+		this.occupation = occupation;
+		this.vostfr = vostfr;
+		this.filmAssocie = filmAssocie;
+		this.salleAssociee = salleAssociee;
+	}
 
 	@Override
 	public String toString() {
 		return "Sceance [sceanceId=" + sceanceId + ", filmId=" + filmId + ", salleId=" + salleId + ", horaireSceance="
 				+ horaireSceance + ", dureeReclams=" + dureeReclams + ", prix=" + prix + ", occupation=" + occupation
-				+ ", vostfr=" + vostfr + "]";
+				+ ", vostfr=" + vostfr + ", filmAssocie=" + filmAssocie + ", salleAssociee=" + salleAssociee + "]";
+	}
+
+	/**
+	 * @return the filmAssocie
+	 */
+	public Film getFilmAssocie() {
+		return filmAssocie;
+	}
+
+	/**
+	 * @param filmAssocie the filmAssocie to set
+	 */
+	public void setFilmAssocie(Film filmAssocie) {
+		this.filmAssocie = filmAssocie;
+	}
+
+	/**
+	 * @return the salleAssociee
+	 */
+	public Salle getSalleAssociee() {
+		return salleAssociee;
+	}
+
+	/**
+	 * @param salleAssociee the salleAssociee to set
+	 */
+	public void setSalleAssociee(Salle salleAssociee) {
+		this.salleAssociee = salleAssociee;
 	}
 
 	/**

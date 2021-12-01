@@ -92,13 +92,8 @@ public class Film {
 
 	@Override
 	public String toString() {
-		return 	"film_id: " + film_id + "\n" +
-						"nom: " + nom + "\n" +
-						"durée: " + duree + "\n" +
-						"producteur: " + producteur + "\n" +
-						"réalisateur: " + realisateur + "\n" +
-						"PEGI: " + pegi + "\n" +
-						"date de diffusion: " + date_diffusion + "\n" +
-						"genre: " + genre+ "\n";
+		return "Film [film_id=" + film_id + ", nom=" + nom + ", duree=" + duree + ", producteur=" + producteur
+				+ ", realisateur=" + realisateur + ", pegi=" + pegi + ", date_diffusion=" + date_diffusion + ", genre="
+				+ genre + "]";
 	}
 }
