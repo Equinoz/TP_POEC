@@ -76,6 +76,10 @@ public class SceanceDAOJDBCImpl {
 		return ret;
 	}
 	
+	public List<Sceance> getSceanceUpgraded(List<Sceance> lst){
+		return null;
+	}
+	
 	public List<Sceance> selectAllWithSF() {
 		List<Sceance> ret = new ArrayList<Sceance>();
 		Connection conn;
