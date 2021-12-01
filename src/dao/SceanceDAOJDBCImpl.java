@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +30,33 @@ public class SceanceDAOJDBCImpl {
 			conn = DriverManager.getConnection(connexionParam);
 
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM sceance");
+			ResultSet rs = ps.executeQuery(); // select
+
+			// Un curseur qui se déplace ligne par ligne pour accéder aux informations
+			while (rs.next()) {
+				Sceance currentSceance = new Sceance(rs.getInt("scéance_id"), rs.getInt("film_id"),
+						rs.getInt("salle_id"), rs.getTimestamp("horaire_scéance"), rs.getTime("durée_réclams"),
+						rs.getInt("prix"), rs.getInt("occupation"), rs.getBoolean("VOSTFR"));
+
+				ret.add(currentSceance);
+
+			}
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ret;
+	}
+	
+	public List<Sceance> selectByDate(LocalDateTime dateTime ) {
+		List<Sceance> ret = new ArrayList<Sceance>();
+		Connection conn;
+		try {
+			conn = DriverManager.getConnection(connexionParam);
+
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM sceance WHERE horaire_scéance >= ?");
+			ps.setTimestamp(1, Timestamp.valueOf(dateTime));
 			ResultSet rs = ps.executeQuery(); // select
 
 			// Un curseur qui se déplace ligne par ligne pour accéder aux informations
