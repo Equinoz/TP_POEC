@@ -5,11 +5,17 @@ import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.time.LocalTime;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import bo.Film;
 
+/**
+ * @author exia
+ *
+ */
 public class FilmDAOJDBCImpl {
 	private String connexionParam = "jdbc:mysql://localhost/cinema?user=root&password=root";
 	public List<Film> selectAll() {
@@ -44,6 +50,77 @@ public class FilmDAOJDBCImpl {
 		return results;
 	}
 
+	public List<Film> selectByName(String strToSearchFor) {
+		List<Film> results = new ArrayList<Film>();
+		Connection conn;
+
+		try {
+			conn = DriverManager.getConnection(connexionParam);
+
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM film WHERE nom LIKE ?");
+			ps.setString(1,strToSearchFor+"%");
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Film currentFilm = new Film(rs.getInt("film_id"),
+										rs.getString("nom"),
+										rs.getTime("durée"),
+										rs.getString("Producteur"),
+										rs.getString("Réalisateur"),
+										rs.getString("PEGI"),
+										rs.getTimestamp("date_diffusion"),
+										rs.getString("genre"));
+
+				results.add(currentFilm);
+			}
+
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return results;
+	}
+	
+	/**
+	 * @param lengthMinute : value of length in minute
+	 * @return
+	 */
+	public List<Film> selectByLength(int lengthMinute) {
+		List<Film> results = new ArrayList<Film>();
+		Connection conn;
+
+		try {
+			conn = DriverManager.getConnection(connexionParam);
+
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM film WHERE durée <= ?");
+			Time timeMilli = Time.valueOf(LocalTime.of(lengthMinute/60,lengthMinute%60));
+			ps.setTime(1,timeMilli);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Film currentFilm = new Film(rs.getInt("film_id"),
+										rs.getString("nom"),
+										rs.getTime("durée"),
+										rs.getString("Producteur"),
+										rs.getString("Réalisateur"),
+										rs.getString("PEGI"),
+										rs.getTimestamp("date_diffusion"),
+										rs.getString("genre"));
+
+				results.add(currentFilm);
+			}
+
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return results;
+	}
+	
 	public Film selectById(int id) {
 		Film result = null;
 		Connection conn;
