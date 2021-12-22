@@ -1,8 +1,8 @@
 package dao;
 import bo.Salle;
+import util.ConnectionCinema;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,15 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SalleDAOJDBClmpl {
-	private String connexionParam = "jdbc:mysql://localhost/cinema?user=root&password=root";
 	
-    public List<Salle> selectAll(){
+    public static List<Salle> selectAll(){
         List<Salle> resultat = new ArrayList<Salle>();
-        Connection connection;
         try{
-            connection = DriverManager.getConnection(connexionParam);
+			Connection conn = ConnectionCinema.getConnection();
 
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM salle");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM salle");
             ResultSet rs = ps.executeQuery(); // select
 
             while (rs.next()){
@@ -27,19 +25,18 @@ public class SalleDAOJDBClmpl {
                 resultat.add(salle);
             }
             ps.close();
-            connection.close();
-        } catch (SQLException throwables) {
+            conn.close();
+        } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }
         return resultat;
     }
-    public Salle selectById(int id) {
+    public static Salle selectById(int id) {
         Salle resultat = null;
-        Connection connection;
         try {
-            connection = DriverManager.getConnection(connexionParam);
+			Connection conn = ConnectionCinema.getConnection();
 
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM salle WHERE salle_id=?");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM salle WHERE salle_id=?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
@@ -50,19 +47,18 @@ public class SalleDAOJDBClmpl {
 
             }
             ps.close();
-            connection.close();
-        } catch (SQLException e) {
+            conn.close();
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return resultat;
     }
-    public int insert(Salle salleInsert) {
+    public static int insert(Salle salleInsert) {
         int resultat = -1;
-        Connection connection;
         try {
-            connection = DriverManager.getConnection(connexionParam);
+			Connection conn = ConnectionCinema.getConnection();
 
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO salle(salle_id, capacité, numéro_salle,équipement_3D,cinemas_id) VALUES (?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO salle(salle_id, capacité, numéro_salle,équipement_3D,cinemas_id) VALUES (?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setInt(1, salleInsert.getSalle_id());
             ps.setInt(2, salleInsert.getCapacité());
             ps.setInt(3, salleInsert.getNumero_salle());
@@ -77,18 +73,17 @@ public class SalleDAOJDBClmpl {
             }
 
             ps.close();
-            connection.close();
-        } catch (SQLException e) {
+            conn.close();
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return resultat;
     }
-    public void update(Salle salleUpdate) {
-        Connection connection;
+    public static void update(Salle salleUpdate) {
         try {
-            connection = DriverManager.getConnection(connexionParam);
+			Connection conn = ConnectionCinema.getConnection();
 
-            PreparedStatement ps = connection.prepareStatement(
+            PreparedStatement ps = conn.prepareStatement(
 					"UPDATE salle SET capacité =?," 
 							+ "numéro_salle =?," 
 							+ "équipement_3D =?," 
@@ -103,23 +98,22 @@ public class SalleDAOJDBClmpl {
             ps.executeUpdate(); // insert, update, delete 
 
             ps.close();
-            connection.close();
-        } catch (SQLException e) {
+            conn.close();
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
-    public void deleteById(int id) {
-        Connection connection;
+    public static void deleteById(int id) {
         try {
-            connection = DriverManager.getConnection(connexionParam);
+			Connection conn = ConnectionCinema.getConnection();
 
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM salle WHERE salle_id= ?");
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM salle WHERE salle_id= ?");
             ps.setInt(1, id);
             ps.executeUpdate(); // insert, update, delete
 
             ps.close();
-            connection.close();
-        } catch (SQLException e) {
+            conn.close();
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
