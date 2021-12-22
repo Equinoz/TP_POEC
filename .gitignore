@@ -1,6 +1,7 @@
 /out
 /.idea/
 /bin/
+/build
 .classpath
 .project
 src/*/*.class
