@@ -7,3 +7,4 @@
 src/*/*.class
 Cinema.iml
 /src/main/java/database.properties
+/src/main/webapp/WEB-INF/lib/*
