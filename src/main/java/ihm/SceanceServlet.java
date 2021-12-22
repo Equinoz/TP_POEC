@@ -35,7 +35,7 @@ public class SceanceServlet extends HttpServlet {
 
 		SceanceModel model = new SceanceModel();
 
-		model.setList(SceanceManager.allSceance());
+		model.setList(SceanceManager.allSF());
 		System.out.println(model.getList());
 		request.setAttribute("model", model);
 		request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);

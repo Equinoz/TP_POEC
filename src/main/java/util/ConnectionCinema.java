@@ -13,7 +13,7 @@ public class ConnectionCinema {
 //		Class.forName(rd.getString("driver"));
 //		// get the connection
 //		return DriverManager.getConnection(rd.getString("url"), rd.getString("userName"), rd.getString("password"));
-		Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("com.mysql.cj.jdbc.Driver");
 		return DriverManager.getConnection("jdbc:mysql://localhost/cinema?user=root&password=root");
 	}
 }
