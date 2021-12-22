@@ -15,7 +15,7 @@ import bo.*;
 
 public class SceanceDAOJDBCImpl {
 
-	private String connexionParam = "jdbc:mysql://localhost/cinema?user=root&password=root";
+	private static String connexionParam = "jdbc:mysql://localhost/cinema?user=root&password=root";
 
 	/**
 	 * @param connexionParam the connexionParam to set
@@ -24,10 +24,11 @@ public class SceanceDAOJDBCImpl {
 		this.connexionParam = connexionParam;
 	}
 
-	public List<Sceance> selectAll() {
+	public static List<Sceance> selectAll() {
 		List<Sceance> ret = new ArrayList<Sceance>();
 		Connection conn;
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(connexionParam);
 
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM sceance");
@@ -44,7 +45,7 @@ public class SceanceDAOJDBCImpl {
 			}
 			ps.close();
 			conn.close();
-		} catch (SQLException e) {
+		} catch (SQLException|ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		return ret;
