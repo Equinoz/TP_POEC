@@ -3,7 +3,6 @@ package dao;
 import java.util.List;
 import java.util.ArrayList;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalTime;
@@ -11,19 +10,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import bo.Film;
+import util.ConnectionCinema;
 
 /**
  * @author exia
  *
  */
 public class FilmDAOJDBCImpl {
-	private String connexionParam = "jdbc:mysql://localhost/cinema?user=root&password=root";
-	public List<Film> selectAll() {
+	public static List<Film> selectAll() {
 		List<Film> results = new ArrayList<Film>();
-		Connection conn;
 
 		try {
-			conn = DriverManager.getConnection(connexionParam);
+			Connection conn = ConnectionCinema.getConnection();
 
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM film");
 			ResultSet rs = ps.executeQuery();
@@ -43,19 +41,18 @@ public class FilmDAOJDBCImpl {
 
 			ps.close();
 			conn.close();
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 
 		return results;
 	}
 
-	public List<Film> selectByName(String strToSearchFor) {
+	public static List<Film> selectByName(String strToSearchFor) {
 		List<Film> results = new ArrayList<Film>();
-		Connection conn;
 
 		try {
-			conn = DriverManager.getConnection(connexionParam);
+			Connection conn = ConnectionCinema.getConnection();
 
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM film WHERE nom LIKE ?");
 			ps.setString(1,strToSearchFor+"%");
@@ -76,7 +73,7 @@ public class FilmDAOJDBCImpl {
 
 			ps.close();
 			conn.close();
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 
@@ -87,12 +84,11 @@ public class FilmDAOJDBCImpl {
 	 * @param lengthMinute : value of length in minute
 	 * @return
 	 */
-	public List<Film> selectByLength(int lengthMinute) {
+	public static List<Film> selectByLength(int lengthMinute) {
 		List<Film> results = new ArrayList<Film>();
-		Connection conn;
 
 		try {
-			conn = DriverManager.getConnection(connexionParam);
+			Connection conn = ConnectionCinema.getConnection();
 
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM film WHERE durée <= ?");
 			Time timeMilli = Time.valueOf(LocalTime.of(lengthMinute/60,lengthMinute%60));
@@ -114,19 +110,18 @@ public class FilmDAOJDBCImpl {
 
 			ps.close();
 			conn.close();
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 
 		return results;
 	}
 	
-	public Film selectById(int id) {
+	public static Film selectById(int id) {
 		Film result = null;
-		Connection conn;
 
 		try {
-			conn = DriverManager.getConnection(connexionParam);
+			Connection conn = ConnectionCinema.getConnection();
 
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM film WHERE film_id=?");
 			ps.setInt(1, id);
@@ -145,19 +140,18 @@ public class FilmDAOJDBCImpl {
 
 			ps.close();
 			conn.close();
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 
 		return result;
 	}
 
-	public int insert(Film newFilm) {
+	public static int insert(Film newFilm) {
 		int result = -1;
-		Connection conn;
 
 		try {
-			conn = DriverManager.getConnection(connexionParam);
+			Connection conn = ConnectionCinema.getConnection();
 
 			PreparedStatement ps = conn.prepareStatement("INSERT INTO film (nom, durée, Producteur, Réalisateur, PEGI, date_diffusion, genre) VALUES (?, ?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(1, newFilm.getNom());
@@ -177,18 +171,17 @@ public class FilmDAOJDBCImpl {
 
 			ps.close();
 			conn.close();
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 
 		return result;
 	}
 
-	public void update(Film updatedFilm) {
-		Connection conn;
+	public static void update(Film updatedFilm) {
 
 		try {
-			conn = DriverManager.getConnection(connexionParam);
+			Connection conn = ConnectionCinema.getConnection();
 
 			PreparedStatement ps = conn.prepareStatement("UPDATE film SET nom=?, durée=?, Producteur=?, Réalisateur=?, PEGI=?, date_diffusion=?, genre=? WHERE film_id=?");
 			ps.setString(1, updatedFilm.getNom());
@@ -204,16 +197,15 @@ public class FilmDAOJDBCImpl {
 
 			ps.close();
 			conn.close();
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void deleteById(int id) {
-		Connection conn;
+	public static void deleteById(int id) {
 
 		try {
-			conn = DriverManager.getConnection(connexionParam);
+			Connection conn = ConnectionCinema.getConnection();
 
 			PreparedStatement ps = conn.prepareStatement("DELETE FROM film WHERE film_id=?");
 			ps.setInt(1, id);
@@ -221,7 +213,7 @@ public class FilmDAOJDBCImpl {
 
 			ps.close();
 			conn.close();
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
