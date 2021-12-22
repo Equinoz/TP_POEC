@@ -222,10 +222,11 @@ public class SceanceDAOJDBCImpl {
 		return ret;
 	}
 	
-	public List<Sceance> selectAllWithSF() {
+	public static List<Sceance> selectAllWithSF() {
 		List<Sceance> ret = new ArrayList<Sceance>();
 		Connection conn;
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(connexionParam);
 
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM sceance as sc "
@@ -257,7 +258,7 @@ public class SceanceDAOJDBCImpl {
 			}
 			ps.close();
 			conn.close();
-		} catch (SQLException e) {
+		} catch (SQLException |ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		return ret;
