@@ -1,5 +1,9 @@
 package bo;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
+@JsonRootName(value = "Salle")
 public class Salle {
     private int salle_id;
     private int capacité;
@@ -19,7 +23,7 @@ public class Salle {
 
     }
 
-
+    @JsonGetter("SalleId")
     public int getSalle_id() {
         return salle_id;
     }
@@ -27,7 +31,7 @@ public class Salle {
     public void setSalle_id(int salle_id) {
         this.salle_id = salle_id;
     }
-
+    @JsonGetter("Capacité")
     public int getCapacité() {
         return capacité;
     }
@@ -36,6 +40,7 @@ public class Salle {
         this.capacité = capacité;
     }
 
+    @JsonGetter("NuméroSalle")
     public int getNumero_salle() {
         return numero_salle;
     }
@@ -44,6 +49,7 @@ public class Salle {
         this.numero_salle = numero_salle;
     }
 
+    @JsonGetter("Equipement3D")
     public int getEquipement_3D() {
         return equipement_3D;
     }
@@ -52,6 +58,7 @@ public class Salle {
         this.equipement_3D = equipement_3D;
     }
 
+    @JsonGetter("CinemasId")
     public int getCinemas_id() {
         return cinemas_id;
     }

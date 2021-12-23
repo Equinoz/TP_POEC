@@ -8,6 +8,19 @@ import bo.Sceance;
 public class SceanceModel {
 	private Sceance curent = new Sceance();
 	private List<Sceance> list = new ArrayList<>();
+	private String jSonListAllSceance = "";
+	
+	
+	/**
+	 * @param curent
+	 * @param list
+	 * @param jSonListAllSceance
+	 */
+	public SceanceModel(Sceance curent, List<Sceance> list, String jSonListAllSceance) {
+		this.curent = curent;
+		this.list = list;
+		this.jSonListAllSceance = jSonListAllSceance;
+	}
 	public SceanceModel(Sceance curent, List<Sceance> list) {
 		super();
 		this.curent = curent;
@@ -15,6 +28,19 @@ public class SceanceModel {
 	}
 	public SceanceModel() {
 		
+	}
+	
+	/**
+	 * @return the jSonListAllSceance
+	 */
+	public String getjSonListAllSceance() {
+		return jSonListAllSceance;
+	}
+	/**
+	 * @param jSonListAllSceance the jSonListAllSceance to set
+	 */
+	public void setjSonListAllSceance(String jSonListAllSceance) {
+		this.jSonListAllSceance = jSonListAllSceance;
 	}
 	public Sceance getCurent() {
 		return curent;
@@ -30,7 +56,7 @@ public class SceanceModel {
 	}
 	@Override
 	public String toString() {
-		return "SceanceModel [curent=" + curent + ", list=" + list + "]";
+		return "SceanceModel [curent=" + curent + ", list=" + list + ", jSonListAllSceance=" + jSonListAllSceance + "]";
 	}
 
 	

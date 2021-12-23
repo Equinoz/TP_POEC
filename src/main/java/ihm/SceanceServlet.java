@@ -1,6 +1,8 @@
 package ihm;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import bll.SceanceManager;
 
-import bo.Sceance;
 
 /**
  * Servlet implementation class SceanceServlet
@@ -35,10 +36,19 @@ public class SceanceServlet extends HttpServlet {
 
 		SceanceModel model = new SceanceModel();
 
-		model.setList(SceanceManager.allSF());
-		System.out.println(model.getList());
-		request.setAttribute("model", model);
-		request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
+		if(request.getParameter("param")!=null) { 
+			PrintWriter out = response.getWriter();
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().print(SceanceManager.allSFJSON());
+			response.getWriter().flush();
+			}else {
+			model.setList(SceanceManager.allSF());
+			model.setjSonListAllSceance(SceanceManager.allSFJSON());
+			System.out.println(model.getList());
+			request.setAttribute("model", model);
+			request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);			
+		}		
 	}
 
 	/**

@@ -3,8 +3,12 @@ package bo;
 import java.sql.Time;
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
 
+@JsonRootName(value = "Sceance")
 public class Sceance {
 
 
@@ -12,6 +16,7 @@ public class Sceance {
 	private int sceanceId;
 	private int filmId;
 	private int salleId;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp horaireSceance;
 	private Time dureeReclams;
 	private int prix;
@@ -83,6 +88,8 @@ public class Sceance {
 	/**
 	 * @return the filmAssocie
 	 */
+
+    @JsonGetter("FilmAssocie")
 	public Film getFilmAssocie() {
 		return filmAssocie;
 	}
@@ -97,6 +104,8 @@ public class Sceance {
 	/**
 	 * @return the salleAssociee
 	 */
+
+    @JsonGetter("SalleAssociee")
 	public Salle getSalleAssociee() {
 		return salleAssociee;
 	}
@@ -111,6 +120,8 @@ public class Sceance {
 	/**
 	 * @return the sceanceId
 	 */
+
+    @JsonGetter("SceanceId")
 	public int getSceanceId() {
 		return sceanceId;
 	}
@@ -123,6 +134,8 @@ public class Sceance {
 	/**
 	 * @return the filmId
 	 */
+
+    @JsonGetter("FilmId")
 	public int getFilmId() {
 		return filmId;
 	}
@@ -135,6 +148,8 @@ public class Sceance {
 	/**
 	 * @return the salleId
 	 */
+
+    @JsonGetter("SalleId")
 	public int getSalleId() {
 		return salleId;
 	}
@@ -147,6 +162,7 @@ public class Sceance {
 	/**
 	 * @return the horaireSceance
 	 */
+    @JsonGetter("HoraireSceance")
 	public Timestamp getHoraireSceance() {
 		return horaireSceance;
 	}
@@ -159,6 +175,7 @@ public class Sceance {
 	/**
 	 * @return the dureeReclams
 	 */
+    @JsonGetter("DureeReclams")
 	public Time getDureeReclams() {
 		return dureeReclams;
 	}
@@ -171,6 +188,7 @@ public class Sceance {
 	/**
 	 * @return the prix
 	 */
+    @JsonGetter("Prix")
 	public int getPrix() {
 		return prix;
 	}
@@ -183,6 +201,7 @@ public class Sceance {
 	/**
 	 * @return the occupation
 	 */
+    @JsonGetter("Occupation")
 	public int getOccupation() {
 		return occupation;
 	}
@@ -195,6 +214,7 @@ public class Sceance {
 	/**
 	 * @return the vostfr
 	 */
+    @JsonGetter("Vostfr")
 	public boolean isVostfr() {
 		return vostfr;
 	}
