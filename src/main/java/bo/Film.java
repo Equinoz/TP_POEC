@@ -10,13 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonRootName;
-
-
 @Entity
 @Table(name = "film")
-@JsonRootName(value = "Film")
 public class Film {
 	@Id
 	@Column(name = "film_id")
@@ -46,7 +41,6 @@ public class Film {
 		this.date_diffusion = date_diffusion;
 		this.genre = genre;
 	}
-	@JsonGetter("id")
 	public int getFilmId() {
 		return film_id;
 	}
@@ -54,7 +48,6 @@ public class Film {
 	public void setFilmId(int value) {
 		film_id = value;
 	}
-	@JsonGetter("Nom")
 	public String getNom() {
 		return nom;
 	}
@@ -62,7 +55,7 @@ public class Film {
 	public void setNom(String value) {
 		nom = value;
 	}
-	@JsonGetter("Durée")
+	
 	public LocalTime getDuree() {
 		return duree;
 	}
@@ -70,7 +63,7 @@ public class Film {
 	public void setDuree(LocalTime value) {
 		duree = value;
 	}
-	@JsonGetter("Producteur")
+
 	public String getProducteur() {
 		return producteur;
 	}
@@ -78,7 +71,7 @@ public class Film {
 	public void setProducteur(String value) {
 		producteur = value;
 	}
-	@JsonGetter("Realisateur")
+
 	public String getRealisateur() {
 		return realisateur;
 	}
@@ -86,7 +79,7 @@ public class Film {
 	public void setRealisateur(String value) {
 		realisateur = value;
 	}
-	@JsonGetter("PEGI")
+
 	public String getPegi() {
 		return pegi;
 	}
@@ -94,7 +87,7 @@ public class Film {
 	public void setPegi(String value) {
 		pegi = value;
 	}
-	@JsonGetter("DateDiffusion")
+
 	public LocalDateTime getDateDiffusion() {
 		return date_diffusion;
 	}
@@ -102,7 +95,7 @@ public class Film {
 	public void setDateDiffusion(LocalDateTime value) {
 		date_diffusion = value;
 	}
-	@JsonGetter("Genre")
+
 	public String getGenre() {
 		return genre;
 	}

@@ -14,10 +14,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import bo.Film;
 
-/**
- * @author exia
- *
- */
 public class FilmDAOJDBCImpl {
 
 	private static Session session;

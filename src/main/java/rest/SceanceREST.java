@@ -16,7 +16,7 @@ import bo.Sceance;
 public class SceanceREST {
 	@GET
 	public List<Sceance> getSceance() {
-		return SceanceManager.allSceance();
+		return SceanceManager.selectAll();
 	}
 
 	@GET

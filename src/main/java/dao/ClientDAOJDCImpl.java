@@ -1,6 +1,5 @@
 package dao;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.RollbackException;
@@ -13,10 +12,9 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import bo.Sceance;
+import bo.Client;
 
-public class SceanceDAOJDBCImpl {
-
+public class ClientDAOJDCImpl {
 	private static Session session;
 
 	static {
@@ -26,26 +24,26 @@ public class SceanceDAOJDBCImpl {
 		session = factory.openSession();
 	}
 
-	public static List<Sceance> selectByDate(LocalDateTime dateTime) {
-		return session.createQuery("from Sceance where horaireSceance = param", Sceance.class)
-				.setParameter("param", dateTime).list();
+	public static List<Client> selectAll() {
+		return session.createQuery("from Client", Client.class).list();
 	}
 
-	public static List<Sceance> selectAll() {
-		return session.createQuery("from Sceance", Sceance.class).list();
+	public static Client selectByName(String strToSearchFor) {
+		return session.createQuery("from Client where nom = :param_nom", Client.class)
+				.setParameter("param_nom", strToSearchFor).getSingleResult();
 	}
 
-	public static Sceance selectById(int id) {
-		return session.find(Sceance.class, id);
+	public static Client selectById(int id) {
+		return session.find(Client.class, id);
 	}
 
-	public static Sceance insert(Sceance sceance) {
+	public static Client insert(Client client) {
 		Transaction t = session.beginTransaction();
 		try {
-			session.save(sceance);
+			session.save(client);
 			session.flush();
 			t.commit();
-			return sceance;
+			return client;
 		} catch (RollbackException rbe) {
 			t.rollback();
 			System.err.println(rbe.getMessage());
@@ -53,13 +51,13 @@ public class SceanceDAOJDBCImpl {
 		}
 	}
 
-	public static Sceance update(Sceance sceance) {
+	public static Client update(Client client) {
 		Transaction t = session.beginTransaction();
 		try {
-			session.update(sceance);
+			session.update(client);
 			session.flush();
 			t.commit();
-			return sceance;
+			return client;
 		} catch (RollbackException rbe) {
 			t.rollback();
 			System.err.println(rbe.getMessage());
@@ -67,18 +65,17 @@ public class SceanceDAOJDBCImpl {
 		}
 	}
 
-	public static Sceance delete(Sceance sceance) {
+	public static Client delete(Client client) {
 		Transaction t = session.beginTransaction();
 		try {
-			session.delete(sceance);
+			session.delete(client);
 			session.flush();
 			t.commit();
-			return sceance;
+			return client;
 		} catch (RollbackException rbe) {
 			t.rollback();
 			System.err.println(rbe.getMessage());
 			return null;
 		}
 	}
-
 }

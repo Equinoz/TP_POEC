@@ -8,7 +8,7 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>sceance</title>
+<title>Gestion Cinéma</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
 <link rel="stylesheet"
@@ -19,14 +19,30 @@
 </head>
 </head>
 
-<body>
-	<div class="container">
+<body onload="loadSceance('${pageContext.request.contextPath}')">
+<div class="header">
+ <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+ 	<div class="navbar-header">
+      <a class="navbar-brand" href="#">Gestion Cinéma</a>
+	</div>
+	<div class="container-fluid">
+    <ul class="navbar-nav">
+      <li class="nav-item"><a class="nav-link " href="index.html">Accueil</a></li>
+      <li class="nav-item"><a class="nav-link active" href="SceanceServlet">Liste des sceance</a></li>
+      <li class="nav-item"><a class="nav-link" href="ASceanceServlet">Ajout Scéance</a></li>
+    </ul>
+  </div>
+</nav>
+	<div class="container-fluid mt-3">
 		<input id="sceance" class="form-control" placeholder="sceance" />
 		<button class="btn btn-success" onclick="cherche()">
 			<i class="fas fa-search"></i>
 		</button>
-	</div>
+	</div> 
+</div>
+	
 	<div id="divDisplaySceance"></div>
+
 	<template id="templateDisplaySceance">
 		<br />
 		<div class="row">

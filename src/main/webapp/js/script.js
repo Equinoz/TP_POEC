@@ -7,8 +7,10 @@ function cherche() {
 	console.log(url);
 }
 
-function loadSceance() {
+function loadSceance(urlBase) {
 	var httprequest;
+	let url = window.location.protocol;
+	url+= urlBase;
 	// Tous les navigateurs sauf IE
 	if (window.XMLHttpRequest) {
 		httprequest = new XMLHttpRequest();
@@ -37,7 +39,7 @@ function loadSceance() {
 		}
 	};
 
-	httprequest.open("GET", "http://localhost:8080/gestionCinema/rest/sceance", true);
+	httprequest.open("GET", url+"/rest/sceance", true);
 	httprequest.send();
 
 }
@@ -95,7 +97,6 @@ function deleteNote(e) {
 	httprequest.send();
 }
 */
-loadSceance();
 
 
 

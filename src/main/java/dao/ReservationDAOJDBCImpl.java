@@ -1,6 +1,5 @@
 package dao;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.RollbackException;
@@ -13,9 +12,9 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import bo.Sceance;
+import bo.Reservation;
 
-public class SceanceDAOJDBCImpl {
+public class ReservationDAOJDBCImpl {
 
 	private static Session session;
 
@@ -26,26 +25,26 @@ public class SceanceDAOJDBCImpl {
 		session = factory.openSession();
 	}
 
-	public static List<Sceance> selectByDate(LocalDateTime dateTime) {
-		return session.createQuery("from Sceance where horaireSceance = param", Sceance.class)
-				.setParameter("param", dateTime).list();
+	public static List<Reservation> selectAll() {
+		return session.createQuery("from Reservation", Reservation.class).list();
 	}
 
-	public static List<Sceance> selectAll() {
-		return session.createQuery("from Sceance", Sceance.class).list();
+	public static Reservation selectByName(String strToSearchFor) {
+		return session.createQuery("from Reservation where nom = :param_nom", Reservation.class)
+				.setParameter("param_nom", strToSearchFor).getSingleResult();
 	}
 
-	public static Sceance selectById(int id) {
-		return session.find(Sceance.class, id);
+	public static Reservation selectById(int id) {
+		return session.find(Reservation.class, id);
 	}
 
-	public static Sceance insert(Sceance sceance) {
+	public static Reservation insert(Reservation reservation) {
 		Transaction t = session.beginTransaction();
 		try {
-			session.save(sceance);
+			session.save(reservation);
 			session.flush();
 			t.commit();
-			return sceance;
+			return reservation;
 		} catch (RollbackException rbe) {
 			t.rollback();
 			System.err.println(rbe.getMessage());
@@ -53,13 +52,13 @@ public class SceanceDAOJDBCImpl {
 		}
 	}
 
-	public static Sceance update(Sceance sceance) {
+	public static Reservation update(Reservation reservation) {
 		Transaction t = session.beginTransaction();
 		try {
-			session.update(sceance);
+			session.update(reservation);
 			session.flush();
 			t.commit();
-			return sceance;
+			return reservation;
 		} catch (RollbackException rbe) {
 			t.rollback();
 			System.err.println(rbe.getMessage());
@@ -67,13 +66,13 @@ public class SceanceDAOJDBCImpl {
 		}
 	}
 
-	public static Sceance delete(Sceance sceance) {
+	public static Reservation delete(Reservation reservation) {
 		Transaction t = session.beginTransaction();
 		try {
-			session.delete(sceance);
+			session.delete(reservation);
 			session.flush();
 			t.commit();
-			return sceance;
+			return reservation;
 		} catch (RollbackException rbe) {
 			t.rollback();
 			System.err.println(rbe.getMessage());
