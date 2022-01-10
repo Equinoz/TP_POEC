@@ -7,6 +7,7 @@
 /.settings/*
 src/*/*.class
 Cinema.iml
+/src/main/java/*.xml
 /src/main/java/database.properties
 /src/main/webapp/WEB-INF/lib/*.jar
 /target/
