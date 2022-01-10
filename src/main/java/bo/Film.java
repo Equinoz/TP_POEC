@@ -3,17 +3,33 @@ package bo;
 import java.sql.Time;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 
+@Entity
+@Table(name = "film")
 @JsonRootName(value = "Film")
 public class Film {
+	@Id
+	@Column(name = "film_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int film_id;
 	private String nom;
+	@Column(name = "durée")
 	private Time duree;
+	@Column(name = "Producteur")
 	private String producteur;
+	@Column(name = "Réalisateur")
 	private String realisateur;
+	@Column(name = "PEGI")
 	private String pegi;
 	private Timestamp date_diffusion;
 	private String genre;

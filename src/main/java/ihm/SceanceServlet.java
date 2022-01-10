@@ -43,7 +43,7 @@ public class SceanceServlet extends HttpServlet {
 			response.getWriter().print(SceanceManager.allSFJSON());
 			response.getWriter().flush();
 			}else {
-			model.setList(SceanceManager.allSF());
+			model.setList(SceanceManager.allSceance());
 			model.setjSonListAllSceance(SceanceManager.allSFJSON());
 			System.out.println(model.getList());
 			request.setAttribute("model", model);
@@ -57,7 +57,6 @@ public class SceanceServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

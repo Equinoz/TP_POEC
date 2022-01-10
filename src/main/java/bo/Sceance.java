@@ -3,59 +3,50 @@ package bo;
 import java.sql.Time;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-
+@Entity
+@Table(name ="sceance")
 @JsonRootName(value = "Sceance")
 public class Sceance {
 
-
-	
+	@Id
+	@Column(name = "scéance_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int sceanceId;
-	private int filmId;
-	private int salleId;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+	@Column(name = "horaire_scéance")
 	private Timestamp horaireSceance;
+	@Column(name = "durée_réclams")
 	private Time dureeReclams;
 	private int prix;
 	private int occupation;
+	@Column(name = "VOSTFR")
 	private boolean vostfr;
+	@ManyToOne
+	@JoinColumn(name = "film_id", foreignKey = @ForeignKey(name = "sceance_FK"))
 	private Film filmAssocie;
-	private Salle salleAssociee;
-	
-	
+	@ManyToOne
+	@JoinColumn(name = "salle_id", foreignKey = @ForeignKey(name = "sceance_FK_1"))
+	private Salle salleAssociee;	
 	
 	/**
 	 * 
 	 */
-	public Sceance() {
-	}
+	public Sceance() {}
 	
-	/**
-	 * @param sceanceId
-	 * @param filmId
-	 * @param salleId
-	 * @param horaireSceance
-	 * @param dureeReclams
-	 * @param prix
-	 * @param occupation
-	 * @param vostfr
-	 */
-	public Sceance(int sceanceId, int filmId, int salleId, Timestamp horaireSceance, Time dureeReclams,
-			int prix, int occupation, boolean vostfr) {
-		this.sceanceId = sceanceId;
-		this.filmId = filmId;
-		this.salleId = salleId;
-		this.horaireSceance = horaireSceance;
-		this.dureeReclams = dureeReclams;
-		this.prix = prix;
-		this.occupation = occupation;
-		this.vostfr = vostfr;
-	}
-	
-
 	/**
 	 * @param sceanceId
 	 * @param horaireSceance
@@ -64,10 +55,10 @@ public class Sceance {
 	 * @param occupation
 	 * @param vostfr
 	 * @param filmAssocie
-	 * @param sceanceAssociee
+	 * @param salleAssociee
 	 */
-	public Sceance(int sceanceId,Film filmAssocie, Salle salleAssociee, Timestamp horaireSceance, Time dureeReclams, 
-			int prix, int occupation, boolean vostfr) {
+	public Sceance(int sceanceId, Timestamp horaireSceance, Time dureeReclams, int prix, int occupation, boolean vostfr,
+			Film filmAssocie, Salle salleAssociee) {
 		this.sceanceId = sceanceId;
 		this.horaireSceance = horaireSceance;
 		this.dureeReclams = dureeReclams;
@@ -76,13 +67,6 @@ public class Sceance {
 		this.vostfr = vostfr;
 		this.filmAssocie = filmAssocie;
 		this.salleAssociee = salleAssociee;
-	}
-
-	@Override
-	public String toString() {
-		return "Sceance [sceanceId=" + sceanceId + ", filmId=" + filmId + ", salleId=" + salleId + ", horaireSceance="
-				+ horaireSceance + ", dureeReclams=" + dureeReclams + ", prix=" + prix + ", occupation=" + occupation
-				+ ", vostfr=" + vostfr + ", filmAssocie=" + filmAssocie + ", salleAssociee=" + salleAssociee + "]";
 	}
 
 	/**
@@ -131,34 +115,7 @@ public class Sceance {
 	public void setSceanceId(int sceanceId) {
 		this.sceanceId = sceanceId;
 	}
-	/**
-	 * @return the filmId
-	 */
-
-    @JsonGetter("FilmId")
-	public int getFilmId() {
-		return filmId;
-	}
-	/**
-	 * @param filmId the filmId to set
-	 */
-	public void setFilmId(int filmId) {
-		this.filmId = filmId;
-	}
-	/**
-	 * @return the salleId
-	 */
-
-    @JsonGetter("SalleId")
-	public int getSalleId() {
-		return salleId;
-	}
-	/**
-	 * @param salleId the salleId to set
-	 */
-	public void setSalleId(int salleId) {
-		this.salleId = salleId;
-	}
+	
 	/**
 	 * @return the horaireSceance
 	 */
@@ -223,6 +180,13 @@ public class Sceance {
 	 */
 	public void setVostfr(boolean vostfr) {
 		this.vostfr = vostfr;
+	}
+
+	@Override
+	public String toString() {
+		return "Sceance [sceanceId=" + sceanceId + ", horaireSceance=" + horaireSceance + ", dureeReclams="
+				+ dureeReclams + ", prix=" + prix + ", occupation=" + occupation + ", vostfr=" + vostfr
+				+ ", filmAssocie=" + filmAssocie + ", salleAssociee=" + salleAssociee + "]";
 	}
 	
 	
