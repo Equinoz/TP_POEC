@@ -4,7 +4,7 @@
 /build/*
 .classpath
 .project
-.settings/*
+/.settings/*
 src/*/*.class
 Cinema.iml
 /src/main/java/database.properties
