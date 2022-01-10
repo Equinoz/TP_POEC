@@ -1,7 +1,7 @@
 package bo;
 
-import java.sql.Time;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,9 +28,9 @@ public class Sceance {
 	private int sceanceId;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
 	@Column(name = "horaire_scéance")
-	private Timestamp horaireSceance;
+	private LocalDateTime horaireSceance;
 	@Column(name = "durée_réclams")
-	private Time dureeReclams;
+	private LocalTime dureeReclams;
 	private int prix;
 	private int occupation;
 	@Column(name = "VOSTFR")
@@ -57,7 +57,7 @@ public class Sceance {
 	 * @param filmAssocie
 	 * @param salleAssociee
 	 */
-	public Sceance(int sceanceId, Timestamp horaireSceance, Time dureeReclams, int prix, int occupation, boolean vostfr,
+	public Sceance(int sceanceId, LocalDateTime horaireSceance, LocalTime dureeReclams, int prix, int occupation, boolean vostfr,
 			Film filmAssocie, Salle salleAssociee) {
 		this.sceanceId = sceanceId;
 		this.horaireSceance = horaireSceance;
@@ -120,26 +120,26 @@ public class Sceance {
 	 * @return the horaireSceance
 	 */
     @JsonGetter("HoraireSceance")
-	public Timestamp getHoraireSceance() {
+	public LocalDateTime getHoraireSceance() {
 		return horaireSceance;
 	}
 	/**
 	 * @param horaireSceance the horaireSceance to set
 	 */
-	public void setHoraireSceance(Timestamp horaireSceance) {
+	public void setHoraireSceance(LocalDateTime horaireSceance) {
 		this.horaireSceance = horaireSceance;
 	}
 	/**
 	 * @return the dureeReclams
 	 */
     @JsonGetter("DureeReclams")
-	public Time getDureeReclams() {
+	public LocalTime getDureeReclams() {
 		return dureeReclams;
 	}
 	/**
 	 * @param dureeReclams the dureeReclams to set
 	 */
-	public void setDureeReclams(Time dureeReclams) {
+	public void setDureeReclams(LocalTime dureeReclams) {
 		this.dureeReclams = dureeReclams;
 	}
 	/**

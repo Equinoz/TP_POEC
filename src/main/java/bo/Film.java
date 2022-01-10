@@ -1,7 +1,7 @@
 package bo;
 
-import java.sql.Time;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,19 +24,19 @@ public class Film {
 	private int film_id;
 	private String nom;
 	@Column(name = "durée")
-	private Time duree;
+	private LocalTime duree;
 	@Column(name = "Producteur")
 	private String producteur;
 	@Column(name = "Réalisateur")
 	private String realisateur;
 	@Column(name = "PEGI")
 	private String pegi;
-	private Timestamp date_diffusion;
+	private LocalDateTime date_diffusion;
 	private String genre;
 
 	public Film() {}
 
-	public Film(int film_id, String nom, Time duree, String producteur, String realisateur, String pegi, Timestamp date_diffusion, String genre) {
+	public Film(int film_id, String nom, LocalTime duree, String producteur, String realisateur, String pegi, LocalDateTime date_diffusion, String genre) {
 		this.film_id = film_id;
 		this.nom = nom;
 		this.duree = duree;
@@ -63,11 +63,11 @@ public class Film {
 		nom = value;
 	}
 	@JsonGetter("Durée")
-	public Time getDuree() {
+	public LocalTime getDuree() {
 		return duree;
 	}
 
-	public void setDuree(Time value) {
+	public void setDuree(LocalTime value) {
 		duree = value;
 	}
 	@JsonGetter("Producteur")
@@ -95,11 +95,11 @@ public class Film {
 		pegi = value;
 	}
 	@JsonGetter("DateDiffusion")
-	public Timestamp getDateDiffusion() {
+	public LocalDateTime getDateDiffusion() {
 		return date_diffusion;
 	}
 
-	public void setDateDiffusion(Timestamp value) {
+	public void setDateDiffusion(LocalDateTime value) {
 		date_diffusion = value;
 	}
 	@JsonGetter("Genre")
