@@ -37,9 +37,9 @@
 		<h2>Ajouter Sceance</h2>
 		<form>
 			<label for="browser" class="form-label">Choisissez la Scéance
-				:</label> <select id="sceance_holder" class="form-select">
-
-			</select> <label for="browser" class="form-label">Choisissez un film a
+				:</label> 
+				 <input type="datetime-local" id="dateHSceance" class="form-control">
+			<label for="browser" class="form-label">Choisissez un film a
 				ajouter a la Scéance</label> <select id="browsers" class="form-select">
 
 			</select> <label for="browser" class="form-label">Prix</label> <select
@@ -63,6 +63,39 @@
 
 			<button type="submit" class="btn btn-primary mt-3"
 				onclick="EnvoyerSceance()">Submit</button>
+
+		</form>
+	</div>
+	<div class="container mt-3">
+		<h2>Modifier Sceance</h2>
+		<form>
+			<label for="browser" class="form-label">Choisissez la Scéance
+				:</label> <select id="sceance_holder" class="form-select">
+				
+			</select> <label for="browser" class="form-label">Choisissez un film a
+				ajouter a la Scéance</label> <select id="browsersM" class="form-select">
+
+			</select> <label for="browser" class="form-label">Prix</label> <select
+				id="prix" class="form-select">
+				<option>5</option>
+				<option>7</option>
+				<option>9</option>
+				<option>12</option>
+			</select>
+			
+			<label for="browser" class="form-label">Langue</label>
+			<select id="langue" class="form-select">
+				<option>VF</option>
+				<option>VO</option>
+				<option>VOSTFR</option>
+			</select>
+			<label for="browser" class="form-label">id salle</label> :</label> <select
+				id="salleid_holderM" class="form-select">
+
+			</select>
+
+			<button type="submit" class="btn btn-primary mt-3"
+				onclick="modifierSceance()">Submit</button>
 
 		</form>
 	</div>

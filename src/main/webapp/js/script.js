@@ -29,7 +29,7 @@ function loadSceance(urlBase) {
 						document.querySelector("#templateDisplaySceance").content,
 						true
 					);
-					newSceance.querySelector("#movieName").innerHTML = contenuJSON[i].filmAssocie.nom;
+					newSceance.querySelector("#movieName").innerHTML = contenuJSON[i].filmAssocie.nom;;
 					newSceance.querySelector("#diffusionDate").innerHTML = new Date(contenuJSON[i].horaireSceance).toLocaleString('fr-FR', { timeZone: 'GMT' })
 					document.querySelector("#divDisplaySceance").appendChild(newSceance);
 				}
@@ -93,8 +93,9 @@ function afficherFilm() {
 			if (httprequest.status == 200) {
 				var contenuJSON = JSON.parse(httprequest.responseText);
 				var maDivF = document.getElementById("browsers");
+				var maDivFM = document.getElementById("browsersM");
 				maDivF.innerHTML = "";
-
+maDivFM.innerHTML = "";
 				for (i = 0; i < contenuJSON.length; i++) {
 
 					var oFilm = document.createElement("option");
@@ -102,6 +103,10 @@ function afficherFilm() {
 					oFilm.value = contenuJSON[i].filmId;
 					maDivF.appendChild(oFilm);
 
+					var oFilmM = document.createElement("option");
+					oFilmM.innerHTML = contenuJSON[i].nom;
+					oFilmM.value = contenuJSON[i].filmId;
+					maDivFM.appendChild(oFilmM);
 				}
 
 			} else {
@@ -129,13 +134,19 @@ function idSalle() {
 			if (httprequest.status == 200) {
 				var contenuJSON = JSON.parse(httprequest.responseText);
 				var maDivF = document.getElementById("salleid_holder");
+				var maDivFM = document.getElementById("salleid_holderM");
 				maDivF.innerHTML = "";
+				maDivFM.innerHTML = "";
 
 				for (i = 0; i < contenuJSON.length; i++) {
 
 					var oFilm = document.createElement("option");
 					oFilm.innerHTML = contenuJSON[i].salle_id;
 					maDivF.appendChild(oFilm);
+					
+					var oFilmM = document.createElement("option");
+					oFilmM.innerHTML = contenuJSON[i].salle_id;
+					maDivFM.appendChild(oFilmM);
 
 				}
 
@@ -166,30 +177,69 @@ function EnvoyerSceance() {
 		if (httprequest.readyState == 4) {
 			if (httprequest.status == 200) {
 				// alert("Succès : insertion de la couleur : " + httprequest.responseText);
-				console.log(dateFormulaire);
-				chargerContenu();
+				console.log(dataFormulaire);
+				
 			} else {
 				alert("Une erreur s'est produite." + httprequest.responseText);
 			}
 		}
 	};
-	var date = document.getElementById("sceance_holder").value;
+	var date = document.getElementById("dateHSceance").value;
 	var film = document.getElementById("browsers").value;
 	var prix = document.getElementById("prix").value;
 	var langue = document.getElementById("langue").value;
 	var id_salle = document.getElementById("salleid_holder").value;
 
 	var dataFormulaire = "date=" + encodeURIComponent(date);
-		dateFormulaire += "film=" + encodeURIComponent(film);
-		dateFormulaire += "prix=" + encodeURIComponent(prix);
-		dateFormulaire += "langue=" + encodeURIComponent(langue);
-		dateFormulaire += "id_salle=" + encodeURIComponent(id_salle);
+		dataFormulaire += "film=" + encodeURIComponent(film);
+		dataFormulaire += "prix=" + encodeURIComponent(prix);
+		dataFormulaire += "langue=" + encodeURIComponent(langue);
+		dataFormulaire += "id_salle=" + encodeURIComponent(id_salle);
 
 	httprequest.open("POST", "http://localhost:8080/TP_POEC/rest/sceance", true);
 	httprequest.setRequestHeader("Accept", "application/json");
 	httprequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	httprequest.send(dataFormulaire);
-	console.log(dateFormulaire);
+
+}
+function modifierSceance(id) {
+	var httprequest;
+	if (window.XMLHttpRequest) {
+		// Tous les navigateurs sauf l'ami Internet Explorer
+		httprequest = new XMLHttpRequest();
+	} else {
+		// Que pour internet explorer
+		httprequest = new ActiveXObject("Msxm12.XMLHTTP");
+	}
+
+	httprequest.onreadystatechange = function() {
+		if (httprequest.readyState == 4) {
+			if (httprequest.status == 200) {
+				// alert("Succès : insertion de la couleur : " + httprequest.responseText);
+				console.log(dataFormulaire);
+				
+			} else {
+				alert("Une erreur s'est produite." + httprequest.responseText);
+			}
+		}
+	};
+	var date = document.getElementById("dateHSceance"+ id).value;
+	var film = document.getElementById("browsers"+ id).value;
+	var prix = document.getElementById("prix" +id).value;
+	var langue = document.getElementById("langue"+id).value;
+	var id_salle = document.getElementById("salleid_holder"+id).value;
+
+	var dataFormulaire = "date=" + encodeURIComponent(date);
+		dataFormulaire += "film=" + encodeURIComponent(film);
+		dataFormulaire += "prix=" + encodeURIComponent(prix);
+		dataFormulaire += "langue=" + encodeURIComponent(langue);
+		dataFormulaire += "id_salle=" + encodeURIComponent(id_salle);
+
+	httprequest.open("PUT", "http://localhost:8080/TP_POEC/rest/sceance/"+id, true);
+	httprequest.setRequestHeader("Accept", "application/json");
+	httprequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	httprequest.send(dataFormulaire);
+
 }
 	
 
