@@ -64,6 +64,7 @@ function afficherSceance() {
 				for (i = 0; i < contenuJSON.length; i++) {
 					var oSceance = document.createElement("option");
 					oSceance.innerHTML = new Date(contenuJSON[i].horaireSceance).toLocaleString('fr-FR', { timeZone: 'GMT' });
+					oSceance.value = contenuJSON[i].horaireSceance;
 					maDivS.appendChild(oSceance);
 
 				}
@@ -73,7 +74,7 @@ function afficherSceance() {
 			}
 		}
 	};
-	httprequest.open("GET", "http://localhost:8080/TP_POEC/rest/sceance", true);
+	httprequest.open("GET", "http://localhost:8080/gestionCinema/rest/sceance", true);
 	httprequest.send();
 }
 function afficherFilm() {
@@ -114,7 +115,7 @@ maDivFM.innerHTML = "";
 			}
 		}
 	};
-	httprequest.open("GET", "http://localhost:8080/TP_POEC/rest/film", true);
+	httprequest.open("GET", "http://localhost:8080/gestionCinema/rest/film", true);
 	httprequest.send();
 }
 function idSalle() {
@@ -155,7 +156,7 @@ function idSalle() {
 			}
 		}
 	};
-	httprequest.open("GET", "http://localhost:8080/TP_POEC/rest/salle", true);
+	httprequest.open("GET", "http://localhost:8080/gestionCinema/rest/salle", true);
 	httprequest.send();
 }
 function ajouterSceance() {
@@ -190,19 +191,20 @@ function EnvoyerSceance() {
 	var langue = document.getElementById("langue").value;
 	var id_salle = document.getElementById("salleid_holder").value;
 
-	var dataFormulaire = "&date=" + encodeURIComponent(date);
+	var dataFormulaire = "date=" + encodeURIComponent(date);
 		dataFormulaire += "&film=" + encodeURIComponent(film);
 		dataFormulaire += "&prix=" + encodeURIComponent(prix);
 		dataFormulaire += "&langue=" + encodeURIComponent(langue);
 		dataFormulaire += "&id_salle=" + encodeURIComponent(id_salle);
 
-	httprequest.open("POST", "http://localhost:8080/TP_POEC/rest/sceance", true);
+	httprequest.open("POST", "http://localhost:8080/gestionCinema/rest/sceance", true);
 	httprequest.setRequestHeader("Accept", "application/json");
 	httprequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	httprequest.send(dataFormulaire);
 
 }
-function modifierSceance(id) {
+function modifierSceance() {
+	let id = 1
 	var httprequest;
 	if (window.XMLHttpRequest) {
 		// Tous les navigateurs sauf l'ami Internet Explorer
@@ -229,13 +231,13 @@ function modifierSceance(id) {
 	var langue = document.getElementById("langue"+id).value;
 	var id_salle = document.getElementById("salleid_holder"+id).value;
 
-	var dataFormulaire = "&date=" + encodeURIComponent(date);
+	var dataFormulaire = "date=" + encodeURIComponent(date);
 		dataFormulaire += "&film=" + encodeURIComponent(film);
 		dataFormulaire += "&prix=" + encodeURIComponent(prix);
 		dataFormulaire += "&langue=" + encodeURIComponent(langue);
 		dataFormulaire += "&id_salle=" + encodeURIComponent(id_salle);
 
-	httprequest.open("PUT", "http://localhost:8080/TP_POEC/rest/sceance/"+id, true);
+	httprequest.open("PUT", "http://localhost:8080/gestionCinema/rest/sceance/"+id, true);
 	httprequest.setRequestHeader("Accept", "application/json");
 	httprequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	httprequest.send(dataFormulaire);
