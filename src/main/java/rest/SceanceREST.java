@@ -1,5 +1,6 @@
 package rest;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import bll.SceanceManager;
@@ -18,13 +19,28 @@ public class SceanceREST {
 	public List<Sceance> getSceance() {
 		return SceanceManager.selectAll();
 	}
-
+	
 	@GET
 	@Path("/{id:\\d+}")
 	public Sceance getSceanceById(@PathParam("id") int id) {
 		return SceanceManager.selectById(id);
 	}
+	
+	@GET
+	@Path("/withRemainingSeats")
+	public List<Sceance> getSceanceWithRemainigSeats() {
+		return SceanceManager.getSceanceWithRemainigSeats();
+	}
 
+	@POST
+	public List<Sceance> getSceanceByDate(@FormParam("date") LocalDate date) {
+		return getSceanceByDate(date);
+	}
+	
+	@POST
+	public List<Sceance> getSceanceByFilm(@FormParam("filmId") Integer filmId) {
+		return SceanceManager.getSceanceByFilm(filmId);
+	}
 	@POST
 	public Sceance insertSceance(@FormParam("content") String content) {
 		Sceance sceanceToInsert = new Sceance();

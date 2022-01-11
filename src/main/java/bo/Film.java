@@ -1,7 +1,7 @@
 package bo;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,10 +16,10 @@ public class Film {
 	@Id
 	@Column(name = "film_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int film_id;
+	private Integer film_id;
 	private String nom;
 	@Column(name = "durée")
-	private LocalTime duree;
+	private Duration duree;
 	@Column(name = "Producteur")
 	private String producteur;
 	@Column(name = "Réalisateur")
@@ -31,7 +31,7 @@ public class Film {
 
 	public Film() {}
 
-	public Film(int film_id, String nom, LocalTime duree, String producteur, String realisateur, String pegi, LocalDateTime date_diffusion, String genre) {
+	public Film(Integer film_id, String nom, Duration duree, String producteur, String realisateur, String pegi, LocalDateTime date_diffusion, String genre) {
 		this.film_id = film_id;
 		this.nom = nom;
 		this.duree = duree;
@@ -41,11 +41,11 @@ public class Film {
 		this.date_diffusion = date_diffusion;
 		this.genre = genre;
 	}
-	public int getFilmId() {
+	public Integer getFilmId() {
 		return film_id;
 	}
 
-	public void setFilmId(int value) {
+	public void setFilmId(Integer value) {
 		film_id = value;
 	}
 	public String getNom() {
@@ -56,11 +56,11 @@ public class Film {
 		nom = value;
 	}
 	
-	public LocalTime getDuree() {
+	public Duration getDuree() {
 		return duree;
 	}
 
-	public void setDuree(LocalTime value) {
+	public void setDuree(Duration value) {
 		duree = value;
 	}
 
