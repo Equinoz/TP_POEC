@@ -1,7 +1,11 @@
 package rest;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import bll.FilmManager;
+import bll.SalleManager;
 import bll.SceanceManager;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.FormParam;
@@ -25,18 +29,52 @@ public class SceanceREST {
 		return SceanceManager.selectById(id);
 	}
 
+	@GET
+	@Path("/withRemainingSeats")
+	public List<Sceance> getSceanceWithRemainigSeats() {
+		return SceanceManager.getSceanceWithRemainigSeats();
+	}
+
+	@GET
+	@Path("/byFilmId/{id:\\\\d+}")
+	public List<Sceance> getSceanceByFilm(@PathParam("id") Integer filmId) {
+		return SceanceManager.getSceanceByFilm(filmId);
+	}
+
 	@POST
-	public Sceance insertSceance(@FormParam("content") String content) {
+	@Path("/byDate")
+	public List<Sceance> getSceanceByDate(@FormParam("date") String date) {
+		return SceanceManager.getSceanceByDate(LocalDate.parse(date));
+	}
+
+	@POST
+	public Sceance insertSceance(@FormParam("date") String dateTime,
+			@FormParam("film") String filmId,
+			@FormParam("prix") String prix,
+			@FormParam("langue") String vostfr,
+			@FormParam("id_salle") String salleId) {
 		Sceance sceanceToInsert = new Sceance();
-		// TODO code the form treatment
+		sceanceToInsert.setHoraireSceance(LocalDateTime.parse(dateTime));
+		sceanceToInsert.setFilmAssocie(FilmManager.selectById(Integer.parseInt(filmId)));
+		sceanceToInsert.setPrix(Integer.parseInt(prix));
+		sceanceToInsert.setVostfr(Boolean.parseBoolean(vostfr));
+		sceanceToInsert.setSalleAssociee(SalleManager.selectById(Integer.parseInt(salleId)));
 		return SceanceManager.insert(sceanceToInsert);
 	}
 
 	@PUT
 	@Path("/{id :  \\d+}")
-	public Sceance updateSceance(@PathParam("id") int id, @FormParam("content") String content) {
+	public Sceance updateSceance(@PathParam("id") int id, @FormParam("date") String dateTime,
+			@FormParam("film") String filmId,
+			@FormParam("prix") String prix,
+			@FormParam("langue") String vostfr,
+			@FormParam("id_salle") String salleId) {
 		Sceance sceanceToUpdate = SceanceManager.selectById(id);
-		// TODO code the form treatment
+		sceanceToUpdate.setHoraireSceance(LocalDateTime.parse(dateTime));
+		sceanceToUpdate.setFilmAssocie(FilmManager.selectById(Integer.parseInt(filmId)));
+		sceanceToUpdate.setPrix(Integer.parseInt(prix));
+		sceanceToUpdate.setVostfr(Boolean.parseBoolean(vostfr));
+		sceanceToUpdate.setSalleAssociee(SalleManager.selectById(Integer.parseInt(salleId)));
 		return SceanceManager.update(sceanceToUpdate);
 	}
 

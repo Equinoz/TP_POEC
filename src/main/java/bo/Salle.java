@@ -13,7 +13,7 @@ public class Salle {
 	@Id
 	@Column(name = "salle_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int salle_id;
+	private Integer salle_id;
 	private int capacité;
 	@Column(name = "numéro_salle")
 	private int numero_salle;
@@ -21,7 +21,7 @@ public class Salle {
 	private int equipement_3D;
 	private Integer cinemas_id;
 
-	public Salle(int salle_id, int capacité, int numero_salle, int equipement_3D, int cinemas_id) {
+	public Salle(Integer salle_id, int capacité, int numero_salle, int equipement_3D, int cinemas_id) {
 		this.salle_id = salle_id;
 		this.capacité = capacité;
 		this.numero_salle = numero_salle;
@@ -33,11 +33,11 @@ public class Salle {
 
 	}
 
-	public int getSalle_id() {
+	public Integer getSalle_id() {
 		return salle_id;
 	}
 
-	public void setSalle_id(int salle_id) {
+	public void setSalle_id(Integer salle_id) {
 		this.salle_id = salle_id;
 	}
 

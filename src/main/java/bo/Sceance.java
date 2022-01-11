@@ -1,7 +1,7 @@
 package bo;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.Duration;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,11 +20,11 @@ public class Sceance {
 	@Id
 	@Column(name = "scéance_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int sceanceId;
+	private Integer sceanceId;
 	@Column(name = "horaire_scéance")
 	private LocalDateTime horaireSceance;
 	@Column(name = "durée_réclams")
-	private LocalTime dureeReclams;
+	private Duration dureeReclams;
 	private int prix;
 	private int occupation;
 	@Column(name = "VOSTFR")
@@ -52,7 +52,7 @@ public class Sceance {
 	 * @param filmAssocie
 	 * @param salleAssociee
 	 */
-	public Sceance(int sceanceId, LocalDateTime horaireSceance, LocalTime dureeReclams, int prix, int occupation,
+	public Sceance(Integer sceanceId, LocalDateTime horaireSceance, Duration dureeReclams, int prix, int occupation,
 			boolean vostfr, Film filmAssocie, Salle salleAssociee) {
 		this.sceanceId = sceanceId;
 		this.horaireSceance = horaireSceance;
@@ -98,14 +98,14 @@ public class Sceance {
 	 * @return the sceanceId
 	 */
 
-	public int getSceanceId() {
+	public Integer getSceanceId() {
 		return sceanceId;
 	}
 
 	/**
 	 * @param sceanceId the sceanceId to set
 	 */
-	public void setSceanceId(int sceanceId) {
+	public void setSceanceId(Integer sceanceId) {
 		this.sceanceId = sceanceId;
 	}
 
@@ -128,14 +128,14 @@ public class Sceance {
 	 * @return the dureeReclams
 	 */
 
-	public LocalTime getDureeReclams() {
+	public Duration getDureeReclams() {
 		return dureeReclams;
 	}
 
 	/**
 	 * @param dureeReclams the dureeReclams to set
 	 */
-	public void setDureeReclams(LocalTime dureeReclams) {
+	public void setDureeReclams(Duration dureeReclams) {
 		this.dureeReclams = dureeReclams;
 	}
 
