@@ -190,11 +190,11 @@ function EnvoyerSceance() {
 	var langue = document.getElementById("langue").value;
 	var id_salle = document.getElementById("salleid_holder").value;
 
-	var dataFormulaire = "date=" + encodeURIComponent(date);
-		dataFormulaire += "film=" + encodeURIComponent(film);
-		dataFormulaire += "prix=" + encodeURIComponent(prix);
-		dataFormulaire += "langue=" + encodeURIComponent(langue);
-		dataFormulaire += "id_salle=" + encodeURIComponent(id_salle);
+	var dataFormulaire = "&date=" + encodeURIComponent(date);
+		dataFormulaire += "&film=" + encodeURIComponent(film);
+		dataFormulaire += "&prix=" + encodeURIComponent(prix);
+		dataFormulaire += "&langue=" + encodeURIComponent(langue);
+		dataFormulaire += "&id_salle=" + encodeURIComponent(id_salle);
 
 	httprequest.open("POST", "http://localhost:8080/TP_POEC/rest/sceance", true);
 	httprequest.setRequestHeader("Accept", "application/json");
@@ -229,11 +229,11 @@ function modifierSceance(id) {
 	var langue = document.getElementById("langue"+id).value;
 	var id_salle = document.getElementById("salleid_holder"+id).value;
 
-	var dataFormulaire = "date=" + encodeURIComponent(date);
-		dataFormulaire += "film=" + encodeURIComponent(film);
-		dataFormulaire += "prix=" + encodeURIComponent(prix);
-		dataFormulaire += "langue=" + encodeURIComponent(langue);
-		dataFormulaire += "id_salle=" + encodeURIComponent(id_salle);
+	var dataFormulaire = "&date=" + encodeURIComponent(date);
+		dataFormulaire += "&film=" + encodeURIComponent(film);
+		dataFormulaire += "&prix=" + encodeURIComponent(prix);
+		dataFormulaire += "&langue=" + encodeURIComponent(langue);
+		dataFormulaire += "&id_salle=" + encodeURIComponent(id_salle);
 
 	httprequest.open("PUT", "http://localhost:8080/TP_POEC/rest/sceance/"+id, true);
 	httprequest.setRequestHeader("Accept", "application/json");
