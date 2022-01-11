@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gestion Cinéma</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+	integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script type="text/javascript" src="js/script.js"></script>
+</head>
+<body style="height: 1500px" onload="ajouterSceance()">
+
+	<!-- Nav Bar -->
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Gestion Cinéma</a>
+		</div>
+		<div class="container-fluid">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link " href="index.html">Accueil</a></li>
+				<li class="nav-item"><a class="nav-link " href="SceanceServlet">Liste
+						des sceance</a></li>
+				<li class="nav-item"><a class="nav-link active"
+					href="ASceance.html">Ajout Scéance</a></li>
+			</ul>
+		</div>
+	</nav>
+	<!-- Formulaire ajout gestion cinéma -->
+
+	<div class="container mt-3">
+		<h2>Ajouter Sceance</h2>
+		<form>
+			<label for="browser" class="form-label">Choisissez la Scéance
+				:</label> <select id="sceance_holder" class="form-select">
+
+			</select> <label for="browser" class="form-label">Choisissez un film a
+				ajouter a la Scéance</label> <select id="browsers" class="form-select">
+
+			</select> <label for="browser" class="form-label">Prix</label> <select
+				id="prix" class="form-select">
+				<option>5</option>
+				<option>7</option>
+				<option>9</option>
+				<option>12</option>
+			</select>
+			
+			<label for="browser" class="form-label">Langue</label>
+			<select id="langue" class="form-select">
+				<option>VF</option>
+				<option>VO</option>
+				<option>VOSTFR</option>
+			</select>
+			<label for="browser" class="form-label">id salle</label> :</label> <select
+				id="salleid_holder" class="form-select">
+
+			</select>
+
+			<button type="submit" class="btn btn-primary mt-3"
+				onclick="EnvoyerSceance()">Submit</button>
+
+		</form>
+	</div>
+</body>
+</html>
