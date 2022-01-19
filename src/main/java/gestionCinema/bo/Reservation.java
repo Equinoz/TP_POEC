@@ -1,5 +1,6 @@
 package gestionCinema.bo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -19,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Reservation {
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "client_id", foreignKey = @ForeignKey(name = "reservation_FK"))
 	private Client client;
 	@ManyToOne

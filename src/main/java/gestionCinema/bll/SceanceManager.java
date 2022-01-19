@@ -17,14 +17,10 @@ import gestionCinema.dao.SceanceDAOJDBCImpl;
 
 @Service
 @Primary
-public class SceanceManager {
+public class SceanceManager extends CrudManager<Sceance, SceanceDAOJDBCImpl> {
 
 	@Autowired
 	SceanceDAOJDBCImpl dao;
-
-	public List<Sceance> selectAll() {
-		return (List<Sceance>) dao.findAll();
-	}
 
 	public List<Sceance> getSceanceWithRemainigSeats() {
 		List<Sceance> lst = new ArrayList<Sceance>();
@@ -84,23 +80,6 @@ public class SceanceManager {
 	public Duration getRemainingTimeBySceance(Sceance sc) {
 		return sc.getDureeReclams().plus(sc.getFilmAssocie().getDuree().getSeconds(), ChronoUnit.SECONDS)
 				.minus(getTimePassedSceance(sc));
-	}
-
-	public Sceance selectById(int id) {
-		return dao.findById(id).orElse(null);
-	}
-
-	public Sceance insert(Sceance sceanceToInsert) {
-		return dao.save(sceanceToInsert);
-	}
-
-	public Sceance delete(Sceance selectById) {
-		dao.delete(selectById);
-		return selectById;
-	}
-
-	public Sceance update(Sceance sceanceToUpdate) {
-		return dao.save(sceanceToUpdate);
 	}
 
 }

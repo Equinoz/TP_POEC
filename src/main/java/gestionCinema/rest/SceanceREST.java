@@ -11,56 +11,57 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import gestionCinema.bll.SceanceManager;
 import gestionCinema.bo.Sceance;
 
 @RestController
-public class SceanceREST {
-	
-	
+@RequestMapping("/WS/sceance")
+public class SceanceREST implements CrudREST<Sceance> {
+
 	@Autowired
 	SceanceManager manager;
 
-	@GetMapping("WS/sceance")
-	public List<Sceance> getClient() {
-		return manager.selectAll();
-	}
-
-	@GetMapping("WS/sceance/{id}")
-	public Sceance getClientById(@PathVariable("id") int id) {
-		return manager.selectById(id);
-	}
-
-	@PostMapping("WS/sceance")
-	public Sceance insertClient(@RequestBody Sceance clientToInsert) {
-		return manager.insert(clientToInsert);
-	}
-
-	@PutMapping("WS/sceance/{id}")
-	public Sceance updateClient(@PathVariable("id") int id, @RequestBody Sceance clientToUpdate) {
-		return manager.update(clientToUpdate);
-	}
-
-	@DeleteMapping("WS/sceance/{id}")
-	public Sceance deleteClientById(@PathVariable("id") int id) {
-		return manager.delete(manager.selectById(id));
-	}
-
-	@GetMapping("WS/sceance/withRemainingSeats")
+	@GetMapping("/withRemainingSeats")
 	public List<Sceance> getSceanceWithRemainigSeats() {
 		return manager.getSceanceWithRemainigSeats();
 	}
 
-	@GetMapping("/WS/sceance/byFilmId/{id}")
+	@GetMapping("/byFilmId/{id}")
 	public List<Sceance> getSceanceByFilm(@PathVariable("id") Integer filmId) {
 		return manager.getSceanceByFilm(filmId);
 	}
 
-	@PostMapping("/WS/sceance/byDate")
+	@PostMapping("/byDate")
 	public List<Sceance> getSceanceByDate(@RequestBody LocalDate date) {
 		return manager.getSceanceByDate(date);
+	}
+
+	@Override
+	public List<Sceance> getAll() {
+		return manager.selectAll();
+	}
+
+	@Override
+	public Sceance getById(Integer id) {
+		return manager.selectById(id);
+	}
+
+	@Override
+	public Sceance insert(Sceance objectToInsert) {
+		return manager.insert(objectToInsert);
+	}
+
+	@Override
+	public Sceance update(Integer id, Sceance objectToUpdate) {
+		return manager.update(objectToUpdate);
+	}
+
+	@Override
+	public Sceance deleteById(Integer id) {
+		return manager.delete(manager.selectById(id));
 	}
 
 }
