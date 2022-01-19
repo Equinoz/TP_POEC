@@ -1,4 +1,4 @@
-package bo;
+package gestionCinema.bo;
 
 public enum StatusSceance {
 	FILM_EN_COURS,
