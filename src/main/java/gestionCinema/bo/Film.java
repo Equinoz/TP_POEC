@@ -35,5 +35,5 @@ public class Film {
 	private String pegi;
 	private LocalDateTime date_diffusion;
 	private String genre;
-	
+	private String lienImg;
 }

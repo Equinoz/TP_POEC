@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajout d'un contact</title>
+</head>
+<body>
+<form th:action="@{/addvalid}" th:object="${contact}" method="post">
+	<label for="nom">nom</label>
+	<input id="nom" th:field="*{nom}"/>
+	<span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
+	<label for="prenom">prenom</label>
+	<input id="prenom" th:field="*{prenom}"/>
+	<label for="tel">téléphone</label>
+	<input id="tel" th:field="*{tel}"/>
+	<input type="submit" value="ajouter"/>
+</form>
+</body>
+</html>
