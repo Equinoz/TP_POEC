@@ -49,10 +49,13 @@ public class GestionCinemaController {
 	}
 
 	@PostMapping("/add")
-	public String add(@ModelAttribute("sceance")Sceance sceance) {
-		
-		manager.insert(sceance);
-		
+	public String add(@ModelAttribute("sceance")Sceance sceance) {		
+		try {
+			manager.insert(sceance);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		return "redirect:ASceance";
 	}
 }
