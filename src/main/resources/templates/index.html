@@ -12,34 +12,49 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Gestion Cinéma</a>
+		</div>
+		<div class="container-fluid">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link " href="index.html">Accueil</a></li>
+				<li class="nav-item"><a class="nav-link " href="SceanceServlet">Liste
+						des sceance</a></li>
+				<li class="nav-item"><a class="nav-link"
+					th:href="ASceance">Ajout Scéance</a></li>
+				<li class="nav-item"><a class="nav-link active"
+					th:href="index">list film</a></li>
+			</ul>
+		</div>
+	</nav>
 	<div class="container">
 		<h1 class="text-center">Liste de Film</h1>
 		<div class="d-flex flex-wrap">
 			<div class="p-2 border" th:each="film : ${lstFilm}">
 				<a th:attr="data-bs-target='#myModal'+${film.film_id}"
-					data-bs-toggle="modal" >
-					<img width="400" height="500" alt="" th:src="${film.lienImg}"></a>
-				<h5 th:text="${film.nom}" class="text-center"/>
+					data-bs-toggle="modal"> <img width="400" height="500" alt=""
+					th:src="${film.lienImg}"></a>
+				<h5 th:text="${film.nom}" class="text-center" />
 			</div>
 		</div>
 	</div>
 	<!-- The Modal -->
-	
+
 	<div th:each="film : ${lstFilm}">
 		<div class="modal" th:id="|myModal${film.film_id}|">
 			<div class="modal-dialog">
 				<div class="modal-content">
-	
+
 					<!-- Modal Header -->
 					<div class="modal-header">
 						<h4 class="modal-title">Description</h4>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 					</div>
-	
+
 					<!-- Modal body -->
 					<div class="modal-body">
-	
+
 						<h1 th:text="${film.nom}"></h1>
 						<h1 th:text="${film.duree}"></h1>
 						<h1 th:text="${film.producteur}"></h1>
@@ -48,13 +63,13 @@
 						<h1 th:text="${film.date_diffusion}"></h1>
 						<h1 th:text="${film.genre}"></h1>
 					</div>
-	
+
 					<!-- Modal footer -->
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger"
 							data-bs-dismiss="modal">Close</button>
 					</div>
-	
+
 				</div>
 			</div>
 		</div>
