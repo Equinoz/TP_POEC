@@ -9,16 +9,42 @@ import gestionCinema.dao.ReservationDAOJDBCImpl;
 
 @Service
 @Primary
-public class ReservationManager extends CrudManager<Reservation, ReservationDAOJDBCImpl>{
-	
+public class ReservationManager extends CrudManager<Reservation, ReservationDAOJDBCImpl> {
+
 	@Autowired
 	ClientManager clientManager;
 	
+	@Autowired
+	BlackListManager blackListManager;
+
 	@Override
-	public Reservation insert(Reservation reservation) {
-		if(reservation.getClient().getClientId()==null) {
-			clientManager.insert(reservation.getClient());
+	public Reservation insert(Reservation reservation) throws ReservationException {
+		if(blackListManager.isBlackListed(reservation.getClient())) {
+			throw new ReservationException("Client sur la black list");
+		}
+		if (reservation.getClient().getClientId() == null) {
+			try {
+				clientManager.insert(reservation.getClient());
+			} catch (Exception e) {
+				throw new ReservationException(e.getMessage());
+			}
 		}
 		return dao.save(reservation);
 	}
+	
+	@Override
+	public Reservation update(Reservation reservation) throws ReservationException {
+		if(blackListManager.isBlackListed(reservation.getClient())) {
+			throw new ReservationException("Client sur la black list");
+		}
+		if (reservation.getClient().getClientId() == null) {
+			try {
+				clientManager.insert(reservation.getClient());
+			} catch (Exception e) {
+				throw new ReservationException(e.getMessage());
+			}
+		}
+		return dao.save(reservation);
+	}
+
 }

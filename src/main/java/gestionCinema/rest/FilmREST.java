@@ -28,12 +28,12 @@ public class FilmREST implements CrudREST<Film>{
 	}
 
 	@Override
-	public Film insert(Film objectToInsert) {
+	public Film insert(Film objectToInsert) throws Exception {
 		return manager.insert(objectToInsert);
 	}
 
 	@Override
-	public Film update(Integer id, Film objectToUpdate) {
+	public Film update(Integer id, Film objectToUpdate) throws Exception {
 		return manager.update(objectToUpdate);
 	}
 

@@ -28,12 +28,12 @@ public class ClientREST implements CrudREST<Client> {
 	}
 
 	@Override
-	public Client insert(Client objectToInsert) {
+	public Client insert(Client objectToInsert) throws Exception {
 		return manager.insert(objectToInsert);
 	}
 
 	@Override
-	public Client update(Integer id, Client objectToUpdate) {
+	public Client update(Integer id, Client objectToUpdate) throws Exception {
 		return manager.update(objectToUpdate);
 	}
 

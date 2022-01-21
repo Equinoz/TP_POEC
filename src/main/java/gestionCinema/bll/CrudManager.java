@@ -7,9 +7,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 
+public class CrudManager<O, D extends CrudRepository<O, Integer>> {
 
-public class CrudManager<O,D extends CrudRepository<O, Integer>>{
-	
 	@Autowired
 	public D dao;
 
@@ -24,7 +23,7 @@ public class CrudManager<O,D extends CrudRepository<O, Integer>>{
 	}
 
 	@Transactional
-	public O insert(O objectToInsert) {
+	public O insert(O objectToInsert) throws Exception {
 		return dao.save(objectToInsert);
 	}
 
@@ -35,8 +34,8 @@ public class CrudManager<O,D extends CrudRepository<O, Integer>>{
 	}
 
 	@Transactional
-	public O update(O objectToUpdate) {
+	public O update(O objectToUpdate) throws Exception {
 		return dao.save(objectToUpdate);
 	}
-	
+
 }

@@ -1,10 +1,11 @@
 package gestionCinema.bo;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,13 +15,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Client {
+public class BlackList {
 
-	private String nom;
-	private String abonnement;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "client_id")
+	private Client blackListedClient;
 	@Id
-	@Column(name = "client_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer clientId;
+	@GeneratedValue
+	private Integer id;
 
 }

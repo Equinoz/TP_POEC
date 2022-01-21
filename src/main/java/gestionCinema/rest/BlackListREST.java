@@ -6,39 +6,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import gestionCinema.bll.SalleManager;
-import gestionCinema.bo.Salle;
+import gestionCinema.bll.BlackListManager;
+import gestionCinema.bo.BlackList;
 
 @RestController
-@RequestMapping("/WS/salle")
-public class SalleREST implements CrudREST<Salle> {
+@RequestMapping("/WS/blacklist")
+public class BlackListREST implements CrudREST<BlackList> {
+	
 	@Autowired
-	SalleManager manager;
+	BlackListManager manager;
 
 	@Override
-	public List<Salle> getAll() {
+	public List<BlackList> getAll() {
 		return manager.selectAll();
 	}
 
 	@Override
-	public Salle getById(Integer id) {
+	public BlackList getById(Integer id) {
 		return manager.selectById(id);
 	}
 
 	@Override
-	public Salle insert(Salle objectToInsert) throws Exception {
+	public BlackList insert(BlackList objectToInsert) throws Exception {
 		return manager.insert(objectToInsert);
 	}
 
 	@Override
-	public Salle update(Integer id, Salle objectToUpdate) throws Exception {
+	public BlackList update(Integer id, BlackList objectToUpdate) throws Exception {
 		return manager.update(objectToUpdate);
 	}
 
 	@Override
-	public Salle deleteById(Integer id) {
+	public BlackList deleteById(Integer id) {
 		return manager.delete(manager.selectById(id));
 	}
 
-	
 }
