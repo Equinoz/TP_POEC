@@ -1,15 +1,12 @@
 package gestionCinema.rest;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,12 +47,12 @@ public class SceanceREST implements CrudREST<Sceance> {
 	}
 
 	@Override
-	public Sceance insert(Sceance objectToInsert) {
+	public Sceance insert(Sceance objectToInsert) throws Exception {
 		return manager.insert(objectToInsert);
 	}
 
 	@Override
-	public Sceance update(Integer id, Sceance objectToUpdate) {
+	public Sceance update(Integer id, Sceance objectToUpdate) throws Exception {
 		return manager.update(objectToUpdate);
 	}
 

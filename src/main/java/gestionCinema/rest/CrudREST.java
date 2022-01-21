@@ -2,6 +2,8 @@ package gestionCinema.rest;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,10 +21,10 @@ public interface CrudREST<O> {
 	public O getById(@PathVariable("id") Integer id);
 
 	@PostMapping
-	public O insert(@RequestBody O objectToInsert);
+	public O insert(@Valid @RequestBody O objectToInsert) throws Exception;
 
 	@PutMapping("/{id}")
-	public O update(@PathVariable("id") Integer id, @RequestBody O objectToUpdate);
+	public O update(@PathVariable("id") Integer id, @Valid @RequestBody O objectToUpdate) throws Exception;
 
 	@DeleteMapping("/{id}")
 	public O deleteById(@PathVariable("id") Integer id);

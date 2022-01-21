@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import gestionCinema.bll.ReservationException;
 import gestionCinema.bll.ReservationManager;
 import gestionCinema.bo.Reservation;
 
@@ -27,12 +28,12 @@ public class ReservationREST implements CrudREST<Reservation> {
 	}
 
 	@Override
-	public Reservation insert(Reservation objectToInsert) {
+	public Reservation insert(Reservation objectToInsert) throws ReservationException {
 		return manager.insert(objectToInsert);
 	}
 
 	@Override
-	public Reservation update(Integer id, Reservation objectToUpdate) {
+	public Reservation update(Integer id, Reservation objectToUpdate) throws ReservationException {
 		return manager.update(objectToUpdate);
 	}
 
