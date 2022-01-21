@@ -70,4 +70,10 @@ public class GestionCinemaController {
 		}
 		return "redirect:ASceance";
 	}
+	@GetMapping("/home")
+	public String home(Model model) {
+		model.addAttribute("lstFilm",managerfilm.selectAll());
+		return "home";
+		
+	}
 }
