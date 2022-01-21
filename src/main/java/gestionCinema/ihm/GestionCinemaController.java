@@ -58,4 +58,16 @@ public class GestionCinemaController {
 		}		
 		return "redirect:ASceance";
 	}
+	
+	@PostMapping("/update")
+	public String update(@ModelAttribute("sceance")Sceance sceance) {
+		
+		try {
+			manager.update(sceance);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:ASceance";
+	}
 }
