@@ -11,7 +11,7 @@ public class LocalDateTimeConverter implements Converter<String, LocalDateTime>{
 
 	@Override
 	public LocalDateTime convert(String source) {
-		return LocalDateTime.parse(source, DateTimeFormatter.ISO_LOCAL_DATE);
+		return LocalDateTime.parse(source, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 	}
 
 }
