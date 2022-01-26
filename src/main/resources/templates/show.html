@@ -9,16 +9,16 @@
     />
 </head>
 
-<body>
+<body onload=updateDetails()> 
     <div th:insert="nav :: nav"> </div>
     <div class="container mt-2">
         <div class="row">
             <div class="col-12 col-md-7">
                 <h1 th:text="${film.nom}"></h1>
-                <p th:text="${film.duree}"></p>
+                <p id="duree" th:text="${film.duree}"></p>
                 <p th:if="${film.producteur != null}" th:text="|Produit par ${film.producteur}|"></p>
                 <p th:if="${film.realisateur != null}" th:text="|Réalisé par ${film.realisateur}|"></p>
-                <p th:text="|PEGI${film.pegi}|"></p>
+                <p th:text="|PEGI+${film.pegi}|"></p>
                 <p th:text="|1ere date de diffusion : ${#temporals.format(film.date_diffusion,'dd-MM-yyyy')}|"></p>
                 <p th:text="|Genre : ${film.genre}|"></p>
                 <p id="description"></p>
