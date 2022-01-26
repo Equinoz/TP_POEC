@@ -84,13 +84,14 @@
 									</div>
 								</div>
 							
-								<div class="carousel-item " th:each="film,iterStat : ${lstFilm}" th:if="${iterStat.index==0}" th:id="chat">
-								<p th:text="${film.nom}"></p>
+								<div class="carousel-item " th:each="sceance,iterStat : ${lstSceancePlaceNP}">
+								<p th:text=${sceance.placeRestante}></p>
+								<p th:text="${sceance.filmAssocie.nom}"></p>
 									<div class="progress" >
 										
 										<br>
 										<div class="progress-bar w-50" role="progressbar"
-											aria-valuenow="75" aria-valuemin="0" aria-valuemax="80"></div>
+											aria-valuenow="75" aria-valuemin="0" th:aria-valuemax="${sceance.salleAssocie}"></div>
 									</div>
 								</div>
 							

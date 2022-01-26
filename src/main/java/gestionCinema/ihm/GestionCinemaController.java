@@ -72,7 +72,8 @@ public class GestionCinemaController {
 	}
 	@GetMapping("/home")
 	public String home(Model model) {
-		model.addAttribute("lstFilm",managerfilm.selectAll());
+		
+		model.addAttribute("lstSceancePlaceNP",manager.getSceanceWithRemainigSeats());
 		return "home";
 		
 	}

@@ -15,7 +15,9 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.AccessLevel;
 
 @Entity
 @Data
@@ -34,6 +36,8 @@ public class Sceance {
 	private Duration dureeReclams;
 	private int prix;
 	private int occupation;
+	@Getter(AccessLevel.NONE)
+	private int placeRestante;
 	@Column(name = "VOSTFR")
 	private boolean vostfr;
 	@ManyToOne
@@ -42,5 +46,12 @@ public class Sceance {
 	@ManyToOne
 	@JoinColumn(name = "salle_id", foreignKey = @ForeignKey(name = "sceance_FK_1"))
 	private Salle salleAssociee;
+	
+	public int getPlaceRestante() {
+		
+		return salleAssociee.getCapacité()-this.occupation;
+	}
 
+	
+	
 }
