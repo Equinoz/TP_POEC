@@ -49,7 +49,7 @@ public class Sceance {
 	
 	public int getPlaceRestante() {
 		
-		return salleAssociee.getCapacité()-this.occupation;
+		return salleAssociee.getCapacite()-this.occupation;
 	}
 
 	

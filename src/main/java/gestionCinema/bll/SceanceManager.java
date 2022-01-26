@@ -25,7 +25,7 @@ public class SceanceManager extends CrudManager<Sceance, SceanceDAOJDBCImpl> {
 	public List<Sceance> getSceanceWithRemainigSeats() {
 		List<Sceance> lst = new ArrayList<Sceance>();
 		for (Sceance sc : selectAll()) {
-			if (sc.getOccupation() < sc.getSalleAssociee().getCapacité()) {
+			if (sc.getOccupation() < sc.getSalleAssociee().getCapacite()) {
 				lst.add(sc);
 			}
 		}
@@ -53,7 +53,7 @@ public class SceanceManager extends CrudManager<Sceance, SceanceDAOJDBCImpl> {
 	}
 
 	public int getRemainingSeatsBySceance(Sceance sc) {
-		return sc.getSalleAssociee().getCapacité() - sc.getOccupation();
+		return sc.getSalleAssociee().getCapacite() - sc.getOccupation();
 	}
 
 	public Duration getTimePassedSceance(Sceance sc) {

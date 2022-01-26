@@ -22,7 +22,8 @@ public class Salle {
 	@Column(name = "salle_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer salle_id;
-	private int capacité;
+	@Column(name="capacité")
+	private int capacite;
 	@Column(name = "numéro_salle")
 	private int numero_salle;
 	@Column(name = "équipement_3D")
