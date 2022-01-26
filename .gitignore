@@ -10,6 +10,7 @@ Cinema.iml
 /src/main/java/*.xml
 /src/main/java/database.properties
 /src/main/resources/application.properties
+/src/main/resources/static/js/env.json
 /src/main/webapp/WEB-INF/lib/*.jar
 /target/
 /build/
