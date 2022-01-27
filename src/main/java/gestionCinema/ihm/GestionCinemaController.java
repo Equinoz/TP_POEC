@@ -77,4 +77,12 @@ public class GestionCinemaController {
 		return "home";
 		
 	}
+
+	@GetMapping("/place")
+	public String place(Model model) {
+		
+		model.addAttribute("lstSceancePlaceNP",manager.getSceanceWithRemainigSeats());
+		return "placeDeCinema";
+		
+	}
 }
