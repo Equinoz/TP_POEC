@@ -12,40 +12,24 @@
 
 <body>
     <div th:insert="nav :: nav"></div>
-    <!-- Card -->
-    <div class="col"></div>
-    </div>
-    <div class="container-fluid">
+    <div class="container mt-5">
         <div class="row">
-            <div class="col"></div>
-            <!-- Card Film -->
-            <div class="col-10 ">
-                <div class="row  overflow-hidden gy-5 mt-5">
-                    <!-- Card prochain film -->
-                    <div class="col-lg-4 mb-3 d-flex align-items-stretch ">
-                        <div th:insert="prochainFilm :: prochainFilm"></div>
-                    </div>
-                    <!-- Card nombre de place restante -->
-                    <div class="col-lg-4 mb-3 d-flex align-items-stretch">
-                        <div class="card" style="min-height: 332px;">
-                            <div class=" p-3 border bg-light" style="min-height: 258px;">
-                                <div th:insert="nombreDePlace :: content"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card meilleur vente -->
-                    <div class="col-lg-4 mb-3 d-flex align-items-stretch ">
-                        <div th:insert="meilleureVente :: meilleureVente"></div>
-                    </div>
-                </div>
+            <!-- Card prochain film -->
+            <div class="col-12 col-md-4">
+                <div th:insert="prochainFilm :: prochainFilm"></div>
             </div>
-            <div class="col"></div>
+            <!-- Card nombre de place restante -->
+            <div class="col-12 col-md-4">
+                <div th:insert="nombreDePlace :: nombreDePlace"></div>
+            </div>
+            <!-- Card meilleur vente -->
+            <div class="col-12 col-md-4">
+                <div th:insert="meilleureVente :: meilleureVente"></div>
+            </div>
         </div>
-
     </div>
-
-    <!-- Footer -->
-    <div th:insert="footer :: footer"></div>
 </body>
+<!-- Footer -->
+<div class="mt-5" th:insert="footer :: footer"></div>
 
 </html>
