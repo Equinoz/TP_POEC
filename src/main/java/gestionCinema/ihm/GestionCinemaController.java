@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import gestionCinema.bll.FilmManager;
+import gestionCinema.bll.ReservationException;
+import gestionCinema.bll.ReservationManager;
 import gestionCinema.bll.SalleManager;
 import gestionCinema.bll.SceanceManager;
 import gestionCinema.bo.Film;
+import gestionCinema.bo.Reservation;
 import gestionCinema.bo.Sceance;
 
 @Controller
@@ -25,6 +28,8 @@ public class GestionCinemaController {
 	FilmManager managerfilm;
 	@Autowired 
 	SalleManager managersalle;
+	@Autowired 
+	ReservationManager managerReserve;
 	@GetMapping("/index")
 	public String index(Model model) {
 		model.addAttribute("lstSceance",manager.selectAll());
@@ -80,9 +85,19 @@ public class GestionCinemaController {
 
 	@GetMapping("/place")
 	public String place(Model model) {
-		
+			
+
+		model.addAttribute("lstSceance",manager.selectAll());	
 		model.addAttribute("lstSceancePlaceNP",manager.getSceanceWithRemainigSeats());
+		model.addAttribute("reservation", new Reservation());
 		return "placeDeCinema";
 		
 	}
+
+	@PostMapping("/addR")
+	public String addR(Model model, Reservation reservation) throws ReservationException {
+		managerReserve.insert(reservation);
+		return "redirect:/reservation";
+	}
+
 }
