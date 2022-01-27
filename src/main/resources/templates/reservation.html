@@ -16,23 +16,26 @@
     <div th:insert="nav :: nav"> </div>
     <!-- Formulaire ajout reservation -->
     <div class="container mt-3">
-        <h2>Ajouter une réservation</h2>
-        <form th:action="@{/reservation/add}" th:object="${reservation}" method="post">
-            <label for="browser" class="form-label">Choisissez la Scéance:</label>
-            <select id="sceance_holder" class="form-select" th:field="*{sceance}">
+        <div class="col-12 col-md-6">
+            <h2>Ajouter une réservation</h2>
+            <form th:action="@{/reservation/add}" th:object="${reservation}" method="post">
+                <label for="browser" class="form-label">Choisissez la Scéance:</label>
+                <select id="sceance_holder" class="form-select" th:field="*{sceance}">
 				<option th:value="${sceance.sceanceId}" th:each="sceance : ${lstSceance}" th:text="|${sceance.filmAssocie.nom} ${sceance.horaireSceance}|"  />
 				</select>
-            <label for="browser" class="form-label">Choisissez le client :</label>
+                <label for="browser" class="form-label">Choisissez le client :</label>
 
-            <span th:if="${#fields.hasErrors('client')}" th:errors="*{client}"></span>
-            <select id="client_holder" class="form-select" th:field="*{client}">
+                <span th:if="${#fields.hasErrors('client')}" th:errors="*{client}"></span>
+                <select id="client_holder" class="form-select" th:field="*{client}">
 				<option th:each="client : ${lstClient}"th:text="${client.nom}" th:value=${client.clientId} />
 				</select>
-            <label for="browser" class="form-label">Choisissez le nombre de places :</label>
-            <input type="number" id="nbPlace" th:field="*{nombrePlaces}" /> <br>
-            <button type="submit" class="btn btn-primary mt-3">Submit</button>
-        </form>
+                <label for="browser" class="form-label">Choisissez le nombre de places :</label>
+                <input class="form-control" type="number" id="nbPlace" th:field="*{nombrePlaces}" />
+                <button type="submit" class="btn btn-primary mt-3">Confirmer</button>
+            </form>
+        </div>
     </div>
 </body>
+<script src="../static/js/nav.js" th:src="@{/js/nav.js}"></script>
 
 </html>

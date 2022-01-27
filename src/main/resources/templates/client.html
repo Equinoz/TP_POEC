@@ -15,13 +15,27 @@
     <div th:insert="nav :: nav"> </div>
     <!-- Formulaire ajout client -->
     <div class="container mt-3">
-        <h2>Ajouter un client</h2>
-        <form th:action="@{/client/add}" th:object="${client}" method="post">
-
-            <button type="submit" class="btn btn-primary mt-3">Submit</button>
-        </form>
+        <div class="col-12 col-md-6">
+            <h2>Ajouter un client</h2>
+            <form th:action="@{/client/add}" th:object="${client}" method="post">
+                <!-- Nom et prénom -->
+                <label for="browser" class="form-label">Nom et prénom :</label>
+                <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
+                <input class="form-control" type="text" id="nom" th:field="*{nom}" />
+                <!-- Type d'abonnement -->
+                <label for="browser" class="form-label">Choisissez le type d'abonnement :</label>
+                <select id="abonnement_holder" class="form-select" th:field="*{abonnement}">
+				<option value=0>Aucun abonnement</option>
+				<option value=1>Hebdomadaire</option>
+				<option value=2>Mensuel</option>
+				<option value=3>Annuel</option>
+				</select>
+                <button type="submit" class="btn btn-primary mt-3">Confirmer</button>
+            </form>
+        </div>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../static/js/nav.js" th:src="@{/js/nav.js}"></script>
 
 </html>
