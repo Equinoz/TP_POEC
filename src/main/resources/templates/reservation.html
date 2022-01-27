@@ -15,6 +15,7 @@
 <body style="height: 1500px">
     <div th:insert="nav :: nav"> </div>
     <!-- Formulaire ajout reservation -->
+    <div th:fragment="reservation">
     <div class="container mt-3">
         <div class="col-12 col-md-6">
             <h2>Ajouter une réservation</h2>
@@ -34,6 +35,7 @@
                 <button type="submit" class="btn btn-primary mt-3">Confirmer</button>
             </form>
         </div>
+    </div>
     </div>
 </body>
 <script src="../static/js/nav.js" th:src="@{/js/nav.js}"></script>
