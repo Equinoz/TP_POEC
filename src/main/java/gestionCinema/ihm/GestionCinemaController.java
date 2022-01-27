@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import gestionCinema.bll.ClientManager;
 import gestionCinema.bll.FilmManager;
 import gestionCinema.bll.ReservationException;
 import gestionCinema.bll.ReservationManager;
@@ -30,6 +31,8 @@ public class GestionCinemaController {
 	SalleManager managersalle;
 	@Autowired 
 	ReservationManager managerReserve;
+	@Autowired
+	ClientManager clientManager;
 	@GetMapping("/index")
 	public String index(Model model) {
 		model.addAttribute("lstSceance",manager.selectAll());
@@ -88,6 +91,7 @@ public class GestionCinemaController {
 			
 
 		model.addAttribute("lstSceance",manager.selectAll());	
+		model.addAttribute("lstClient", clientManager.selectAll());
 		model.addAttribute("lstSceancePlaceNP",manager.getSceanceWithRemainigSeats());
 		model.addAttribute("reservation", new Reservation());
 		return "placeDeCinema";
