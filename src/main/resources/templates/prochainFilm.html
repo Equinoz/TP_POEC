@@ -12,15 +12,15 @@
     <div th:fragment="prochainFilm" class="card align-items-stretch" style="min-height: 332px;">
         <!--TODO : Modifier controller pour récuperer le prochain film -->
         <div th:each="sceance,eachStatus : ${lstSceancePlaceNP}">
-            <div th:if=${eachStatus.first}>
-                <img class="img-fluid" th:src=${sceance.filmAssocie.lienImg}>
-                <div class=" p-3 border bg-light" style="min-height: 255px;">
+            <div th:if="${eachStatus.index==6}">
+                <img class="img-fluid " th:src=${sceance.filmAssocie.lienImg}>
+                <div class=" p-3 border bg-light " style="min-height: 255px; ">
                     <h1>Prochain Film</h1>
                     <p th:text=${sceance.filmAssocie.nom}></p>
-                    <p th:text="${sceance.horaireSceance}"></p>
+                    <p th:text="${sceance.horaireSceance} "></p>
                 </div>
-                <div class=" card-body d-flex flex-column">
-                    <a type="button" class="btn btn-primary mt-auto align-self-start" th:href="|/show/${sceance.filmAssocie.film_id}|">Plus d'info</a>
+                <div class=" card-body d-flex flex-column ">
+                    <a type="button " class="btn btn-primary mt-auto align-self-start " th:href="|/show/${sceance.filmAssocie.film_id}| ">Plus d'info</a>
                 </div>
             </div>
         </div>

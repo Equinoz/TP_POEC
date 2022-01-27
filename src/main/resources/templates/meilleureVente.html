@@ -12,7 +12,7 @@
     <div th:fragment="meilleureVente" class="card align-items-stretch" style="min-height: 332px;">
         <!--TODO : Modifier controller pour récuperer la meilleure vente -->
         <div th:each="sceance,eachStatus : ${lstSceancePlaceNP}">
-            <div th:if=${eachStatus.last}>
+            <div th:if="${eachStatus.index==8}">
                 <img class="img-fluid" th:src=${sceance.filmAssocie.lienImg}>
                 <div class=" p-3 border bg-light" style="min-height: 255px;">
                     <h1>Meilleure vente</h1>
