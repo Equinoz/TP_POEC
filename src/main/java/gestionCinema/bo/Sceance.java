@@ -46,12 +46,13 @@ public class Sceance {
 	@ManyToOne
 	@JoinColumn(name = "salle_id", foreignKey = @ForeignKey(name = "sceance_FK_1"))
 	private Salle salleAssociee;
-	
+
 	public int getPlaceRestante() {
-		
-		return salleAssociee.getCapacite()-this.occupation;
+		if (salleAssociee != null) {
+			return salleAssociee.getCapacite() - this.occupation;
+		} else {
+			return 0;
+		}
 	}
 
-	
-	
 }
