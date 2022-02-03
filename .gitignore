@@ -56,7 +56,7 @@ src/main/resources/frontend/fontend-cinema/out-tsc
 src/main/resources/frontend/fontend-cinema/bazel-out
 
 # Node
-src/main/resources/frontend/fontend-cinema/node_modules
+src/main/resources/frontend/fontend-cinema/node_modules/
 src/main/resources/frontend/fontend-cinema/npm-debug.log
 src/main/resources/frontend/fontend-cinema/yarn-error.log
 
