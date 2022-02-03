@@ -47,3 +47,46 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Angular frontEnd ###
+# Compiled output
+src/main/resources/frontend/fontend-cinema/dist
+src/main/resources/frontend/fontend-cinema/tmp
+src/main/resources/frontend/fontend-cinema/out-tsc
+src/main/resources/frontend/fontend-cinema/bazel-out
+
+# Node
+src/main/resources/frontend/fontend-cinema/node_modules
+src/main/resources/frontend/fontend-cinema/npm-debug.log
+src/main/resources/frontend/fontend-cinema/yarn-error.log
+
+# IDEs and editors
+src/main/resources/frontend/fontend-cinema/.idea/
+src/main/resources/frontend/fontend-cinema/.project
+src/main/resources/frontend/fontend-cinema/.classpath
+src/main/resources/frontend/fontend-cinema/.c9/
+src/main/resources/frontend/fontend-cinema/*.launch
+src/main/resources/frontend/fontend-cinema/.settings/
+src/main/resources/frontend/fontend-cinema/*.sublime-workspace
+
+# Visual Studio Code
+src/main/resources/frontend/fontend-cinema/.vscode/*
+src/main/resources/frontend/fontend-cinema/!.vscode/settings.json
+src/main/resources/frontend/fontend-cinema/!.vscode/tasks.json
+src/main/resources/frontend/fontend-cinema/!.vscode/launch.json
+src/main/resources/frontend/fontend-cinema/!.vscode/extensions.json
+src/main/resources/frontend/fontend-cinema/.history/*
+
+# Miscellaneous
+src/main/resources/frontend/fontend-cinema/.angular/cache
+src/main/resources/frontend/fontend-cinema/.sass-cache/
+src/main/resources/frontend/fontend-cinema/connect.lock
+src/main/resources/frontend/fontend-cinema/coverage
+src/main/resources/frontend/fontend-cinema/libpeerconnection.log
+src/main/resources/frontend/fontend-cinema/testem.log
+src/main/resources/frontend/fontend-cinema/typings
+
+# System files
+src/main/resources/frontend/fontend-cinema/.DS_Store
+src/main/resources/frontend/fontend-cinema/Thumbs.db
+
